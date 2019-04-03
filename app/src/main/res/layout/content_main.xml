@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorHomeCard">
+    android:background="#212F3D">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,6 +37,211 @@
                     android:text="@string/main_page_about"
                     android:textColor="#E5E7E9"
                     android:textSize="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/colorHomeCard"
+                        >
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/workshop_img"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="20"
+                                android:textColor="#D7DBDD"
+                                android:layout_margin="5dp"
+                                android:textAlignment="center"
+                                android:textSize="25dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Workshops"
+                                android:textStyle="bold"
+                                android:layout_margin="5dp"
+                                android:textColor="#D7DBDD"
+                                android:textAlignment="center"
+                                android:textSize="20dp"
+                                />
+
+                        </LinearLayout>
+
+                            </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/colorHomeCard"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/speakers_img"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="20"
+                                    android:layout_margin="5dp"
+                                    android:textColor="#D7DBDD"
+                                    android:textAlignment="center"
+                                    android:textSize="25dp"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Speakers"
+                                    android:layout_margin="5dp"
+                                    android:textStyle="bold"
+                                    android:textColor="#D7DBDD"
+                                    android:textAlignment="center"
+                                    android:textSize="20dp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/colorHomeCard"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/sponsors_img"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="20"
+                                    android:layout_margin="5dp"
+                                    android:textColor="#D7DBDD"
+                                    android:textAlignment="center"
+                                    android:textSize="25dp"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Sponsors"
+                                    android:layout_margin="5dp"
+                                    android:textStyle="bold"
+                                    android:textColor="#D7DBDD"
+                                    android:textAlignment="center"
+                                    android:textSize="20dp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/colorHomeCard"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/countries_img"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="88"
+                                    android:textColor="#D7DBDD"
+                                    android:layout_margin="5dp"
+                                    android:textAlignment="center"
+                                    android:textSize="25dp"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Countries"
+                                    android:layout_margin="5dp"
+                                    android:textStyle="bold"
+                                    android:textColor="#D7DBDD"
+                                    android:textAlignment="center"
+                                    android:textSize="20dp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </ScrollView>
