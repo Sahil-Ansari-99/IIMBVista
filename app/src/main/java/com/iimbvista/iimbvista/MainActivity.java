@@ -7,11 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
-
     TextView workshop_number,sponsors_number,countries_number,speakers_number;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout=(DrawerLayout)findViewById(R.id.home_drawer_layout);
 
+        toolbar=(Toolbar)findViewById(R.id.home_toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_toggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
