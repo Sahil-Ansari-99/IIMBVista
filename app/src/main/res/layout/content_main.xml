@@ -105,13 +105,14 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/workshop_number"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="20"
-                                android:textColor="#D7DBDD"
                                 android:layout_margin="5dp"
+                                android:text="20"
                                 android:textAlignment="center"
-                                android:textSize="25dp"/>
+                                android:textColor="#D7DBDD"
+                                android:textSize="25dp" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -155,6 +156,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/speakers_number"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
@@ -213,13 +215,14 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/sponsors_number"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="20"
                                     android:layout_margin="5dp"
-                                    android:textColor="#D7DBDD"
+                                    android:text="20"
                                     android:textAlignment="center"
-                                    android:textSize="25dp"/>
+                                    android:textColor="#D7DBDD"
+                                    android:textSize="25dp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -263,13 +266,14 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/countires_number"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="88"
-                                    android:textColor="#D7DBDD"
                                     android:layout_margin="5dp"
+                                    android:text="88"
                                     android:textAlignment="center"
-                                    android:textSize="25dp"/>
+                                    android:textColor="#D7DBDD"
+                                    android:textSize="25dp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
