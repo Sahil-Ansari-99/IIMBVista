@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         workshop_number=findViewById(R.id.workshop_number);
         speakers_number=findViewById(R.id.speakers_number);
         sponsors_number=findViewById(R.id.sponsors_number);
-        countries_number=findViewById(R.id.countires_number);
+        countries_number=findViewById(R.id.countries_number);
         animateTextView(0,20,workshop_number);
         animateTextView(0,20,speakers_number);
         animateTextView(0,20,sponsors_number);
