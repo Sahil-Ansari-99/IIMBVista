@@ -87,32 +87,35 @@
                         app:cardBackgroundColor="@color/colorHomeCard"
                         >
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_margin="5dp"
-                                android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="12dp"
-                        android:src="@drawable/workshop_img"/>
-
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/workshop_number"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:text="20"
-                                android:textAlignment="center"
-                                android:textColor="#D7DBDD"
-                                android:textSize="25dp" />
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginTop="12dp"
+                                    android:src="@drawable/workshop_img"/>
+
+                                <TextView
+                                    android:id="@+id/workshop_number"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:text="20"
+                                    android:textStyle="bold"
+                                    android:textAlignment="center"
+                                    android:textColor="#D7DBDD"
+                                    android:textSize="25dp" />
+
+                            </LinearLayout>
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -127,33 +130,34 @@
 
                         </LinearLayout>
 
-                            </LinearLayout>
 
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="5dp"
+                        app:cardCornerRadius="5dp"
                         app:cardBackgroundColor="@color/colorHomeCard"
                         >
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="5dp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_marginTop="12dp"
-                                android:src="@drawable/speakers_img" />
+                            android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginTop="12dp"
+                                    android:src="@drawable/speakers_img"/>
 
                                 <TextView
                                     android:id="@+id/speakers_number"
@@ -161,46 +165,55 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
                                     android:text="20"
+                                    android:textStyle="bold"
                                     android:textAlignment="center"
                                     android:textColor="#D7DBDD"
                                     android:textSize="25dp" />
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:text="Speakers"
-                                    android:textAlignment="center"
-                                    android:textColor="#D7DBDD"
-                                    android:textSize="20dp"
-                                    android:textStyle="bold" />
-
                             </LinearLayout>
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Speakers"
+                                android:textStyle="bold"
+                                android:layout_margin="5dp"
+                                android:textColor="#D7DBDD"
+                                android:textAlignment="center"
+                                android:textSize="20dp"
+                                />
+
                         </LinearLayout>
+
 
                     </android.support.v7.widget.CardView>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_margin="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        app:cardBackgroundColor="@color/colorHomeCard"
-                        >
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardBackgroundColor="@color/colorHomeCard"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_margin="5dp"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -209,49 +222,53 @@
                                 android:layout_marginTop="12dp"
                                 android:src="@drawable/sponsors_img"/>
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/sponsors_number"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/sponsors_number"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:text="20"
-                                    android:textAlignment="center"
-                                    android:textColor="#D7DBDD"
-                                    android:textSize="25dp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Sponsors"
-                                    android:layout_margin="5dp"
-                                    android:textStyle="bold"
-                                    android:textColor="#D7DBDD"
-                                    android:textAlignment="center"
-                                    android:textSize="20dp"
-                                    />
-
-                            </LinearLayout>
+                                android:layout_margin="5dp"
+                                android:text="20"
+                                android:textStyle="bold"
+                                android:textAlignment="center"
+                                android:textColor="#D7DBDD"
+                                android:textSize="25dp" />
 
                         </LinearLayout>
 
-                    </android.support.v7.widget.CardView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sponsors"
+                            android:textStyle="bold"
+                            android:layout_margin="5dp"
+                            android:textColor="#D7DBDD"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            />
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/colorHomeCard"
-                        >
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardBackgroundColor="@color/colorHomeCard"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_margin="5dp"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -260,39 +277,36 @@
                                 android:layout_marginTop="12dp"
                                 android:src="@drawable/countries_img"/>
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/countries_number"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/countires_number"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:text="88"
-                                    android:textAlignment="center"
-                                    android:textColor="#D7DBDD"
-                                    android:textSize="25dp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Countries"
-                                    android:layout_margin="5dp"
-                                    android:textStyle="bold"
-                                    android:textColor="#D7DBDD"
-                                    android:textAlignment="center"
-                                    android:textSize="20dp"
-                                    />
-
-                            </LinearLayout>
+                                android:layout_margin="5dp"
+                                android:text="20"
+                                android:textStyle="bold"
+                                android:textAlignment="center"
+                                android:textColor="#D7DBDD"
+                                android:textSize="25dp" />
 
                         </LinearLayout>
 
-                    </android.support.v7.widget.CardView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Countries"
+                            android:textStyle="bold"
+                            android:layout_margin="5dp"
+                            android:textColor="#D7DBDD"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            />
 
-                </LinearLayout>
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
 
             </LinearLayout>
 
