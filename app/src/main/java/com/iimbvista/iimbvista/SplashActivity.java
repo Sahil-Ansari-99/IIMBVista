@@ -6,17 +6,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 public class SplashActivity extends AppCompatActivity {
 
+    ImageView splash_image;
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 1000;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         this.setContentView(R.layout.activity_splash);
+
+        splash_image=findViewById(R.id.splash_image);
+        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        splash_image.startAnimation(myFadeInAnimation);
+
 
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
