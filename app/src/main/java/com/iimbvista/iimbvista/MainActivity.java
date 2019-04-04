@@ -1,13 +1,17 @@
 package com.iimbvista.iimbvista;
 
+import android.animation.ValueAnimator;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
+
+    TextView workshop_number,sponsors_number,countries_number,speakers_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,29 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_toggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        workshop_number=findViewById(R.id.workshop_number);
+        speakers_number=findViewById(R.id.speakers_number);
+        sponsors_number=findViewById(R.id.sponsors_number);
+        countries_number=findViewById(R.id.countires_number);
+        animateTextView(0,20,workshop_number);
+        animateTextView(0,20,speakers_number);
+        animateTextView(0,20,sponsors_number);
+        animateTextView(0,88,countries_number);
+
+    }
+
+    public void animateTextView(int initialValue, int finalValue, final TextView  textview) {
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(initialValue, finalValue);
+        valueAnimator.setDuration(2000);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                textview.setText(valueAnimator.getAnimatedValue().toString());
+            }
+        });
+        valueAnimator.start();
+
     }
 
     @Override
