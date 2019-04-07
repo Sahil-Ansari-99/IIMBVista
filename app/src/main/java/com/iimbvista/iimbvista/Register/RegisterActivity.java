@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -84,13 +85,14 @@ public class RegisterActivity extends AppCompatActivity {
     public void registerUser(String name, String password, String email, String nonce){
         RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
 
-        String url="https://www.iimb-vista.com/2019/app_api/user/register/?username="+name+"&email="+email+"&nonce="+nonce+"&display_name="+name;
+        String url="https://www.iimb-vista.com/2019/app_api/user/register/?username="+name+"&email="+email+"&password="+password+"&nonce="+nonce+"&display_name="+name;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject obj = new JSONObject(response);
+                    Log.e("Response",response);
                     int status=obj.getInt("status");
                     if(status==2){
                         Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_LONG).show();
@@ -103,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.e("Error",error.toString());
             }
         });
 
