@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorHomeText">#45B39D</color>
     <color name="colorHomeCard">#34495E</color>
+    <color name="colorBackground">#212F3D</color>
 </resources>

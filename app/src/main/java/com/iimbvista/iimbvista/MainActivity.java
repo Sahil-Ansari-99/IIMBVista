@@ -1,6 +1,9 @@
 package com.iimbvista.iimbvista;
 
 import android.animation.ValueAnimator;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +11,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+
+import com.iimbvista.iimbvista.Register.RegisterActivity;
+import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -34,6 +40,19 @@ public class MainActivity extends AppCompatActivity {
         animateTextView(0,20,speakers_number);
         animateTextView(0,20,sponsors_number);
         animateTextView(0,88,countries_number);
+
+        NavigationView navigationView=(NavigationView)findViewById(R.id.home_nav_view);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.nav_sponsors){
+                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                    return true;
+                }
+                return false;
+            }
+        });
 
     }
 

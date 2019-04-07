@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/colorHomeCard"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="5dp">
     
     <LinearLayout
@@ -17,13 +18,13 @@
             android:src="@drawable/vistalogo_dark"
             android:layout_margin="5dp"
             android:scaleType="fitXY"
-            android:id="@+id/speakers_card_img"/>
+            android:id="@+id/sponsors_card_img"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/speakers_card_name"
-            android:text="Speaker Name"
+            android:id="@+id/sponsors_card_name"
+            android:text="Sponsor Name"
             android:textColor="#D7DBDD"
             android:layout_margin="5dp"
             android:layout_gravity="center_horizontal"
@@ -40,8 +41,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/speakers_card_designation"
-            android:text="Designation"
+            android:id="@+id/sponsors_card_title"
+            android:text="Sponsor Title"
             android:textSize="20dp"
             android:textColor="#D7DBDD"
             android:layout_margin="5dp"
