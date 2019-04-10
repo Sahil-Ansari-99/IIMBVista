@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userDegree=degree.getText().toString();
 
                 if(!userName.isEmpty() && !userPass.isEmpty() && !userEmail.isEmpty() && !userCompany.isEmpty() && !userCity.isEmpty() && !userDegree.isEmpty()) {
-//                    registerUser(userName, userPass, userEmail, nonceId);
+                    registerUser(userName, userPass, userEmail, nonceId);
                     addToDB(userName,userEmail,userCompany,userCity,nonceId);
                 }
             }
@@ -103,12 +103,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject obj = new JSONObject(response);
+//                    JSONObject obj = new JSONObject(response);
                     Log.e("Response",response);
-                    int status=obj.getInt("status");
-                    if(status==2){
-                        Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_LONG).show();
-                    }
+//                    int status=obj.getInt("status");
+//                    if(status==2){
+//                        Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_LONG).show();
+//                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
