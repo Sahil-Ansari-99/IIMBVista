@@ -59,10 +59,12 @@ public class TestActivity extends AppCompatActivity {
 //                    String status = jObj.getString("nonce");
 //                    textView.setText("success");
 
-                    StringTokenizer tokenizer=new StringTokenizer(response," ");
+                    StringTokenizer tokenizer=new StringTokenizer(response,"^");
                     String name=tokenizer.nextToken();
+                    String url=tokenizer.nextToken();
+                    String title=tokenizer.nextToken();
 //                    responseString=response.split(" ");
-                    Log.e("test",name);
+                    Log.e("test",name +" " + url + " " + title);
 //                    Picasso.with(getApplicationContext()).load(response).into(imageView);
                     Log.e("stringRequest",response);
                 }catch (Exception e){
