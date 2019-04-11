@@ -37,9 +37,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:textColorHint="#7F8C8D"
-                    app:boxBackgroundColor="#FFFFFF"
-                    app:boxStrokeColor="#FFFFFF">
+                    android:textColorHint="#7F8C8D">
 
                     <EditText
                         android:id="@+id/input_name"
@@ -57,7 +55,8 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:textColorHint="#7F8C8D">
 
                     <EditText
                         android:id="@+id/input_email"
@@ -75,7 +74,8 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:textColorHint="#7F8C8D">
 
                     <EditText
                         android:id="@+id/input_password"
@@ -93,7 +93,8 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:textColorHint="#7F8C8D">
 
                     <EditText
                         android:id="@+id/input_company"
@@ -111,7 +112,8 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:textColorHint="#7F8C8D">
 
                     <EditText
                         android:id="@+id/input_city"
@@ -129,7 +131,8 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:textColorHint="#7F8C8D">
 
                     <EditText
                         android:id="@+id/input_degree"
