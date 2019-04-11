@@ -42,7 +42,7 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dummy_sponsor);
 
-//        imageView=(ImageView)findViewById(R.id.dummy_tv);
+        imageView=(ImageView)findViewById(R.id.dummy_tv);
         getData();
 
 //        Picasso.with(getApplicationContext()).load(API_LINK).into(imageView);
@@ -65,8 +65,7 @@ public class TestActivity extends AppCompatActivity {
                     String title=tokenizer.nextToken();
 //                    responseString=response.split(" ");
                     Log.e("test",name +" " + url + " " + title);
-//                    Picasso.with(getApplicationContext()).load(response).into(imageView);
-                    Log.e("stringRequest",response);
+                    Picasso.with(getApplicationContext()).load(url).into(imageView);
                 }catch (Exception e){
                     e.printStackTrace();
                 }

@@ -1,5 +1,7 @@
 package com.iimbvista.iimbvista.Register;
 
+import android.app.Application;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -124,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public  void addToDB(String name,String email , String company , String city , String nonceId)
+    public  void addToDB(String name, final String email , String company , String city , String nonceId)
     {
         RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
         Date c= Calendar.getInstance().getTime();
@@ -137,6 +140,17 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     Log.e("Addition to DB",response);
+                    if(response.equals("Email id already exists"))
+                    {
+                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                        EditText email=(EditText)findViewById(R.id.input_email);
+                        email.requestFocus();
+                        InputMethodManager imm = (InputMethodManager) getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+                        imm.showSoftInput(email, InputMethodManager.SHOW_IMPLICIT);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
