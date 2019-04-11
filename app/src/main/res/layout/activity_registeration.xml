@@ -17,9 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="#000000"
         app:cardCornerRadius="5dp"
-        app:cardBackgroundColor="@color/colorHomeCard">
+        app:cardUseCompatPadding="true">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,10 +33,13 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:textColorHint="#7F8C8D"
+                    app:boxBackgroundColor="#FFFFFF"
+                    app:boxStrokeColor="#FFFFFF">
 
                     <EditText
                         android:id="@+id/input_name"
@@ -51,10 +54,10 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp">
 
                     <EditText
                         android:id="@+id/input_email"
@@ -69,8 +72,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp">
 
@@ -87,10 +90,10 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp">
 
                     <EditText
                         android:id="@+id/input_company"
@@ -105,10 +108,10 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp">
 
                     <EditText
                         android:id="@+id/input_city"
@@ -123,19 +126,19 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp">
 
                     <EditText
                         android:id="@+id/input_degree"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:textColorHint="#fff"
                         android:hint="Current Degree/Designation"
-                        android:textColor="#FFFFFF" />
+                        android:inputType="text"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#fff" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.v7.widget.AppCompatButton
@@ -143,14 +146,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="24dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginRight="10dp"
-                    android:textColor="#fff"
-                    android:background="@color/colorBackground"
+                    android:layout_marginBottom="24dp"
+                    android:background="@color/colorAccent"
                     android:padding="12dp"
-                    android:text="Register"/>
+                    android:text="Register"
+                    android:textColor="#fff" />
 
 
             </LinearLayout>

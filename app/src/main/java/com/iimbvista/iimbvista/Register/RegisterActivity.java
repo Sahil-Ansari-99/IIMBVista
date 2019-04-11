@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userDegree=degree.getText().toString();
 
                 if(!userName.isEmpty() && !userPass.isEmpty() && !userEmail.isEmpty() && !userCompany.isEmpty() && !userCity.isEmpty() && !userDegree.isEmpty()) {
-                    registerUser(userName, userPass, userEmail, nonceId);
+//                    registerUser(userName, userPass, userEmail, nonceId);
                     addToDB(userName,userEmail,userCompany,userCity,nonceId);
                 }
             }
