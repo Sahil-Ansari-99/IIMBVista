@@ -49,10 +49,29 @@
                     android:textColorHint="#7F8C8D">
 
                     <EditText
-                        android:id="@+id/input_name"
+                        android:id="@+id/input_first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Name"
+                        android:hint="First Name"
+                        android:inputType="text"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#fff" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:textColorHint="#7F8C8D">
+
+                    <EditText
+                        android:id="@+id/input_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name"
                         android:inputType="text"
                         android:textColor="#FFFFFF"
                         android:textColorHint="#fff" />
