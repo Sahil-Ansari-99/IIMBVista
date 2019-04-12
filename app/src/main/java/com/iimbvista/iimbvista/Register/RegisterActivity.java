@@ -156,21 +156,15 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     else if(response.equals("Registration Failed")){
                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(getApplicationContext(), RegisterationResult.class);
+                        intent.putExtra("Result", response);
+                        startActivity(intent);
                     }
                     else{
                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
-                        AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
-                        builder.setMessage(response);
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                                Intent intent=new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-                        AlertDialog alertDialog=builder.create();
-                        alertDialog.show();
+                        Intent intent=new Intent(getApplicationContext(), RegisterationResult.class);
+                        intent.putExtra("Result", response);
+                        startActivity(intent);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
