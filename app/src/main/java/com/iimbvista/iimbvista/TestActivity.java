@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,8 +36,11 @@ import okhttp3.Callback;
 public class TestActivity extends AppCompatActivity {
 
     ImageView imageView;
+    TextView tv;
     String responseString[];
-    public static String API_LINK="http://www.iimb-vista.com/2019/vista_app_sponsors.php?id=1";
+    String nonceId;
+    Button button;
+    public static String API_LINK="http://www.iimb-vista.com/2019/app_api/get_nonce/?controller=user&method=register";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +48,15 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.dummy_sponsor);
 
 //        imageView=(ImageView)findViewById(R.id.dummy_tv);
-        getData();
+        tv=(TextView)findViewById(R.id.dummy_tv);
+
+        button=(Button)findViewById(R.id.dummy_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getData();
+            }
+        });
 
 //        Picasso.with(getApplicationContext()).load(API_LINK).into(imageView);
     }
@@ -59,14 +72,22 @@ public class TestActivity extends AppCompatActivity {
 //                    String status = jObj.getString("nonce");
 //                    textView.setText("success");
 
-                    StringTokenizer tokenizer=new StringTokenizer(response,"^");
-                    String name=tokenizer.nextToken();
-                    String url=tokenizer.nextToken();
-                    String title=tokenizer.nextToken();
-//                    responseString=response.split(" ");
-                    Log.e("test",name +" " + url + " " + title);
-//                    Picasso.with(getApplicationContext()).load(response).into(imageView);
-                    Log.e("stringRequest",response);
+//                    StringTokenizer tokenizer=new StringTokenizer(response,"^");
+//                    String name=tokenizer.nextToken();
+//                    String url=tokenizer.nextToken();
+//                    String title=tokenizer.nextToken();
+////                    responseString=response.split(" ");
+//                    Log.e("test",name +" " + url + " " + title);
+////                    Picasso.with(getApplicationContext()).load(response).into(imageView);
+//                    Log.e("stringRequest",response);
+                    try{
+                        JSONObject jObj = new JSONObject(response);
+                        nonceId=jObj.getString("nonce");
+                        Log.e("Nonce",nonceId);
+                        tv.setText(nonceId);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }

@@ -1,6 +1,5 @@
 package com.iimbvista.iimbvista.Sponsors;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
@@ -12,15 +11,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.iimbvista.iimbvista.Adapter.SponsorsAdapter;
-import com.iimbvista.iimbvista.Model.SponsorsModel;
+import com.iimbvista.iimbvista.Model.RootObject;
+import com.iimbvista.iimbvista.Model.Sponsors;
 import com.iimbvista.iimbvista.R;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +31,6 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 
 public class SponsorsActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -38,7 +40,9 @@ public class SponsorsActivity extends AppCompatActivity {
     TextView name;
     OkHttpClient client;
     Request request;
-    List<SponsorsModel> itemList;
+    List<Sponsors> itemList;
+
+    public static String SPONS_LINK="http://www.iimb-vista.com/2019/sponsors.json";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,40 +61,28 @@ public class SponsorsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         itemList=new ArrayList<>();
-
-        itemList.add(new SponsorsModel("Sponsor Name","Sponsor Title", "url"));
-        itemList.add(new SponsorsModel("Sponsor Name","Sponsor Title", "url"));
-        itemList.add(new SponsorsModel("Sponsor Name","Sponsor Title", "url"));
-        itemList.add(new SponsorsModel("Sponsor Name","Sponsor Title", "url"));
-        adapter=new SponsorsAdapter(getApplicationContext(), itemList);
-        recyclerView.setAdapter(adapter);
+        getData();
     }
 
     private void getData() {
-        client=new OkHttpClient();
-        request=new Request.Builder().url(String.format("http://www.iimb-vista.com/vista_app_sponsors.php",0)).build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        name.setText("Failed");
-                    }
-                });
-            }
+        RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
 
+        StringRequest stringRequest=new StringRequest(com.android.volley.Request.Method.GET, SPONS_LINK, new Response.Listener<String>() {
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String data=response.body().toString();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        name.setText(data);
-                    }
-                });
+            public void onResponse(String s) {
+                Gson gson=new Gson();
+                RootObject rootObject=gson.fromJson(s, new TypeToken<RootObject>(){}.getType());
+                itemList=rootObject.getSponsors();
+                adapter=new SponsorsAdapter(getApplicationContext(), itemList);
+                recyclerView.setAdapter(adapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
             }
         });
+        requestQueue.add(stringRequest);
     }
 
     @Override

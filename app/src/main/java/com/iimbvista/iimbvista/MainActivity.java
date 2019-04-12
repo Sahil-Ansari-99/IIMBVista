@@ -47,8 +47,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if(menuItem.getItemId() == R.id.nav_sponsors){
+                    startActivity(new Intent(getApplicationContext(), SponsorsActivity.class));
+                    return true;
+                }else if(menuItem.getItemId() == R.id.nav_register){
                     startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
                     return true;
+                }else if(menuItem.getItemId() == R.id.nav_home){
+                    drawerLayout.closeDrawers();
                 }
                 return false;
             }
