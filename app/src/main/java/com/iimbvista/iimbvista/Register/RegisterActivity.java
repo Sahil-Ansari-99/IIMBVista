@@ -16,6 +16,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -38,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegister;
     public static String API_LINK="http://www.iimb-vista.com/2019/app_api/get_nonce/?controller=user&method=register";
     String nonceId;
+    ProgressBar progressBar;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         company=(EditText)findViewById(R.id.input_company);
         city=(EditText)findViewById(R.id.input_city);
         degree=(EditText)findViewById(R.id.input_degree);
-
+        progressBar=findViewById(R.id.progressBar);
         btnRegister=(Button)findViewById(R.id.btn_register);
 
         nonceId=getNonceId();
@@ -68,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userDegree=degree.getText().toString();
 
                 if(!userName.isEmpty() && !userPass.isEmpty() && !userEmail.isEmpty() && !userCompany.isEmpty() && !userCity.isEmpty() && !userDegree.isEmpty()) {
+                    progressBar.setVisibility(View.VISIBLE);
                     registerUser(userName, userPass, userEmail, nonceId);
                     addToDB(userName,userEmail,userCompany,userCity);
                 }
@@ -130,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         requestQueue.add(stringRequest);
+        progressBar.setVisibility(View.GONE);
     }
 
     public  void addToDB(String name, final String email , String company , String city)
@@ -185,6 +190,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
 
-
+        progressBar.setVisibility(View.GONE);
     }
 }
