@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -90,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                 try{
                     JSONObject jObj = new JSONObject(response);
                     nonceId=jObj.getString("nonce");
-
+                    Log.e("Nonce",nonceId);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -109,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void registerUser(String name, String password, String email, String nonce){
         RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
 
-        String url="https://www.iimb-vista.com/2019/app_api/user/register/?username="+name+"&email="+email+"&password="+password+"&nonce="+nonce+"&display_name="+name;
+        String url="https://www.iimb-vista.com/2019/app_api/user/register/?insecure=cool&username="+name+"&email="+email+"&nonce="+nonce+"&display_name="+name+"&user_pass="+password;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
