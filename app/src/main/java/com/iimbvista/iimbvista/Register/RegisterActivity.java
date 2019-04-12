@@ -1,6 +1,10 @@
 package com.iimbvista.iimbvista.Register;
 
+import android.app.AlertDialog;
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.R;
 
 import org.json.JSONObject;
@@ -31,7 +36,6 @@ import java.util.Date;
 public class RegisterActivity extends AppCompatActivity {
     EditText name,password,email,company,city,degree;
     Button btnRegister;
-
     public static String API_LINK="http://www.iimb-vista.com/2019/app_api/get_nonce/?controller=user&method=register";
     String nonceId;
 
@@ -55,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 view.startAnimation(buttonClick);
+
                 String userName=name.getText().toString();
                 String userPass=password.getText().toString();
                 String userEmail=email.getText().toString();
@@ -64,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(!userName.isEmpty() && !userPass.isEmpty() && !userEmail.isEmpty() && !userCompany.isEmpty() && !userCity.isEmpty() && !userDegree.isEmpty()) {
                     registerUser(userName, userPass, userEmail, nonceId);
-                    addToDB(userName,userEmail,userCompany,userCity,nonceId);
+                    addToDB(userName,userEmail,userCompany,userCity);
                 }
             }
         });
@@ -127,13 +132,13 @@ public class RegisterActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public  void addToDB(String name, final String email , String company , String city , String nonceId)
+    public  void addToDB(String name, final String email , String company , String city)
     {
         RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
         Date c= Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm aaa");
         String time_stamp=df.format(c);
-        String url="https://www.iimb-vista.com/2019/app_register.php?id="+nonceId+"&name="+name+"&email="+email+"&college="+company+"&city="+city+"&date="+time_stamp;
+        String url="https://www.iimb-vista.com/2019/app_register.php?name="+name+"&email="+email+"&college="+company+"&city="+city+"&date="+time_stamp;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -148,8 +153,23 @@ public class RegisterActivity extends AppCompatActivity {
                         InputMethodManager imm = (InputMethodManager) getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
                         imm.showSoftInput(email, InputMethodManager.SHOW_IMPLICIT);
                     }
-                    else {
+                    else if(response.equals("Registration Failed")){
                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
+                        builder.setMessage(response);
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                        AlertDialog alertDialog=builder.create();
+                        alertDialog.show();
                     }
                 }catch (Exception e){
                     e.printStackTrace();
