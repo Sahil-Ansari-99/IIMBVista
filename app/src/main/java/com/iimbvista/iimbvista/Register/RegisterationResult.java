@@ -27,7 +27,7 @@ public class RegisterationResult extends AppCompatActivity {
         button=(Button)findViewById(R.id.reg_result_button);
 
         if(!resultReg.equals("Registration Failed")||!resultReg.equals("Email id already exists")){
-            tv.setText("Registration Successful\n"+"Your unique Vista ID is:"+resultReg);
+            tv.setText("Registration Successful\n"+"Your unique Vista ID is: "+resultReg);
         }else{
             tv.setText(resultReg);
         }

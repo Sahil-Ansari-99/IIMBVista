@@ -1,7 +1,10 @@
 package com.iimbvista.iimbvista.Sponsors;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +22,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.iimbvista.iimbvista.Adapter.SponsorsAdapter;
+import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.Model.RootObject;
 import com.iimbvista.iimbvista.Model.Sponsors;
 import com.iimbvista.iimbvista.R;
+import com.iimbvista.iimbvista.Register.RegisterActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,6 +67,23 @@ public class SponsorsActivity extends AppCompatActivity {
 
         itemList=new ArrayList<>();
         getData();
+
+        NavigationView navigationView=(NavigationView)findViewById(R.id.sponsors_nav_view);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.nav_sponsors){
+                    drawerLayout.closeDrawers();
+                }else if(menuItem.getItemId() == R.id.nav_register){
+                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                    return true;
+                }else if(menuItem.getItemId() == R.id.nav_home){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
+                return false;
+            }
+        });
     }
 
     private void getData() {
