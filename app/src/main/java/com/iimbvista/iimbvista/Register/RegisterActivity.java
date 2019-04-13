@@ -36,7 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText first_name,last_name,password,email,company,city,degree;
+    EditText first_name,last_name,password,email,confirm_email,company,city,degree,vcap;
     Button btnRegister;
     public static String API_LINK="http://www.iimb-vista.com/2019/app_api/get_nonce/?controller=user&method=register";
     String nonceId;
@@ -52,11 +52,13 @@ public class RegisterActivity extends AppCompatActivity {
         last_name=findViewById(R.id.input_last_name);
         password=(EditText)findViewById(R.id.input_password);
         email=(EditText)findViewById(R.id.input_email);
+        confirm_email=findViewById(R.id.confirm_email);
         company=(EditText)findViewById(R.id.input_company);
         city=(EditText)findViewById(R.id.input_city);
         degree=(EditText)findViewById(R.id.input_degree);
         progressBar=findViewById(R.id.progressBar);
         btnRegister=(Button)findViewById(R.id.btn_register);
+        vcap=findViewById(R.id.vcap);
 
         nonceId=getNonceId();
 
@@ -69,16 +71,25 @@ public class RegisterActivity extends AppCompatActivity {
                 String userLastName=last_name.getText().toString();
                 String userPass=password.getText().toString();
                 String userEmail=email.getText().toString();
+                String userConfirmEmail=confirm_email.getText().toString();
                 String userCompany=company.getText().toString();
                 String userCity=city.getText().toString();
                 String userDegree=degree.getText().toString();
+                String userVCAP=vcap.getText().toString();
                 String userName=userFirstName+" "+userLastName+" "+userDegree;
                 String dbName=userFirstName+" "+userLastName;
 
-                if(!userName.isEmpty() && !userPass.isEmpty() && !userEmail.isEmpty() && !userCompany.isEmpty() && !userCity.isEmpty() && !userDegree.isEmpty()) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    registerUser(userName, userPass, userEmail, nonceId);
-                    addToDB(dbName,userEmail,userCompany,userCity);
+                if(!userName.isEmpty() && !userPass.isEmpty() && !userEmail.isEmpty() && !userConfirmEmail.isEmpty()  && !userCompany.isEmpty() && !userCity.isEmpty() && !userDegree.isEmpty()) {
+
+                    if(userEmail.equals(userConfirmEmail)) {
+                        progressBar.setVisibility(View.VISIBLE);
+                        registerUser(userName, userPass, userEmail, nonceId);
+                        addToDB(dbName, userEmail, userCompany, userCity, userVCAP);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Email id does not match",Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -142,13 +153,13 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
     }
 
-    public  void addToDB(String db_Name, final String email , String company , String city)
+    public  void addToDB(String db_Name, final String email , String company , String city,String VCAP)
     {
         RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
         Date c= Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm aaa");
         String time_stamp=df.format(c);
-        String url="https://www.iimb-vista.com/2019/app_register.php?name="+db_Name+"&email="+email+"&college="+company+"&city="+city+"&date="+time_stamp;
+        String url="https://www.iimb-vista.com/2019/app_register.php?name="+db_Name+"&email="+email+"&college="+company+"&city="+city+"&date="+time_stamp+"&vcap="+VCAP;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
