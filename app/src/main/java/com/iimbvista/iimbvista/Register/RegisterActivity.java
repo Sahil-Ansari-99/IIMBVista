@@ -42,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
     String nonceId;
     ProgressBar progressBar;
     private ProgressBar spinner;
+    boolean regResult=true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,7 +85,11 @@ public class RegisterActivity extends AppCompatActivity {
                     if(userEmail.equals(userConfirmEmail)) {
                         progressBar.setVisibility(View.VISIBLE);
                         registerUser(userName, userPass, userEmail, nonceId);
-                        addToDB(dbName, userEmail, userCompany, userCity, userVCAP);
+                        if(regResult) {
+                            addToDB(dbName, userEmail, userCompany, userCity, userVCAP);
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Please try again", Toast.LENGTH_LONG).show();
+                        }
                     }
                     else{
                         Toast.makeText(getApplicationContext(),"Email id does not match",Toast.LENGTH_SHORT).show();
@@ -133,6 +138,7 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
 //                    JSONObject obj = new JSONObject(response);
                     Log.e("Response",response);
+                    regResult=true;
 //                    int status=obj.getInt("status");
 //                    if(status==2){
 //                        Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_LONG).show();
@@ -146,6 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("Error",error.toString());
+                regResult=false;
             }
         });
 
