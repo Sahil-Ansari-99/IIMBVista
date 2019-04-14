@@ -84,12 +84,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if(userEmail.equals(userConfirmEmail)) {
                         progressBar.setVisibility(View.VISIBLE);
-                        registerUser(userName, userPass, userEmail, nonceId);
-                        if(regResult) {
-                            addToDB(dbName, userEmail, userCompany, userCity, userVCAP);
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Please try again", Toast.LENGTH_LONG).show();
-                        }
+//                        registerUser(userName, userPass, userEmail, nonceId);
+                        sendRegRequest(userFirstName, userLastName, userPass, userEmail, userCity, userCompany, userVCAP);
                     }
                     else{
                         Toast.makeText(getApplicationContext(),"Email id does not match",Toast.LENGTH_SHORT).show();
@@ -208,5 +204,30 @@ public class RegisterActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
         progressBar.setVisibility(View.GONE);
+    }
+
+    public void sendRegRequest(String firstname, String lastname, String password, String email, String city, String college, String vcap){
+        RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
+        Date c= Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm aaa");
+        String time_stamp=df.format(c);
+        String url="https://www.iimb-vista.com/2019/app_reg.php?firstname="+firstname+"&lastname="+lastname+"&email="+email+"&college="+college+"&city="+city+"&vcap="+vcap+"&password="+password;
+
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Intent intent=new Intent(getApplicationContext(), RegisterationResult.class);
+                intent.putExtra("Result", response);
+                startActivity(intent);
+                finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        requestQueue.add(stringRequest);
     }
 }
