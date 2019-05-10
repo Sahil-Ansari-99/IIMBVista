@@ -1,15 +1,8 @@
 package com.iimbvista.iimbvista.Register;
 
-import android.app.AlertDialog;
-import android.app.Application;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.R;
 
 import org.json.JSONObject;
@@ -49,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeration);
 
-        first_name=(EditText)findViewById(R.id.input_first_name);
+        first_name=(EditText)findViewById(R.id.login_password);
         last_name=findViewById(R.id.input_last_name);
         password=(EditText)findViewById(R.id.input_password);
         email=(EditText)findViewById(R.id.input_email);
