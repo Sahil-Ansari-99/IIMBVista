@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 }else if(menuItem.getItemId() == R.id.nav_register){
                     startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
                     return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_login) {
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    return true;
                 }else if(menuItem.getItemId() == R.id.nav_home){
                     drawerLayout.closeDrawers();
                 }

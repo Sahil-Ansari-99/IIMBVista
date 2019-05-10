@@ -14,4 +14,8 @@
         android:icon="@drawable/ic_nav_sponsors"
         android:title="Sponsors" />
 
+    <item
+        android:id="@+id/nav_login"
+        android:icon="@drawable/ic_nav_login"
+        android:title="Login" />
 </menu>
