@@ -13,9 +13,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -30,7 +33,7 @@ import java.util.Date;
 public class RegisterActivity extends AppCompatActivity {
     EditText first_name,last_name,password,email,confirm_email,company,city,degree,vcap;
     Button btnRegister;
-    public static String API_LINK="http://www.iimb-vista.com/2019/app_api/get_nonce/?controller=user&method=register";
+    public static String API_LINK="http://www.iimb-vista.com/app_api/get_nonce/?controller=user&method=register";
     String nonceId;
     ProgressBar progressBar;
     private ProgressBar spinner;
@@ -76,7 +79,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if(userEmail.equals(userConfirmEmail)) {
                         progressBar.setVisibility(View.VISIBLE);
-//                        registerUser(userName, userPass, userEmail, nonceId);
+//                        registerUser(userEmail, userPass, userEmail, nonceId);
+//                        addToDB(dbName, userEmail, userCompany, userCity, userVCAP);
                         sendRegRequest(userFirstName, userLastName, userPass, userEmail, userCity, userCompany, userVCAP);
                     }
                     else{
@@ -118,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void registerUser(String name, String password, String email, String nonce){
         RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
 
-        String url="https://www.iimb-vista.com/2019/app_api/user/register/?insecure=cool&username="+name+"&email="+email+"&nonce="+nonce+"&display_name="+name+"&user_pass="+password;
+        String url="http://www.iimb-vista.com/app_api/user/register/?insecure=cool&username="+name+"&email="+email+"&nonce="+nonce+"&display_name="+name+"&user_pass="+password;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -154,7 +158,7 @@ public class RegisterActivity extends AppCompatActivity {
         Date c= Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm aaa");
         String time_stamp=df.format(c);
-        String url="https://www.iimb-vista.com/2019/app_register.php?name="+db_Name+"&email="+email+"&college="+company+"&city="+city+"&date="+time_stamp+"&vcap="+VCAP;
+        String url="https://www.iimb-vista.com/2019/confirm_email.php?name="+db_Name+"&email="+email+"&college="+company+"&city="+city+"&date="+time_stamp+"&vcap="+VCAP;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -203,12 +207,13 @@ public class RegisterActivity extends AppCompatActivity {
         Date c= Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm aaa");
         String time_stamp=df.format(c);
-        String url="https://www.iimb-vista.com/2019/app_reg.php?firstname="+firstname+"&lastname="+lastname+"&email="+email+"&college="+college+"&city="+city+"&vcap="+vcap+"&password="+password;
+        String url="https://www.iimb-vista.com/2019/app_reg.php/?firstname="+firstname+"&lastname="+lastname+"&email="+email+"&college="+college+"&city="+city+"&vcap="+vcap+"&password="+password;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Intent intent=new Intent(getApplicationContext(), RegisterationResult.class);
+                Log.e("Response", response);
                 intent.putExtra("Result", response);
                 startActivity(intent);
                 finish();
@@ -216,6 +221,27 @@ public class RegisterActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (error instanceof TimeoutError) {
+                    Log.e("Response", error.toString());
+                } else if (error instanceof NoConnectionError) {
+                    Log.e("Response", "No Connection");
+                }
+            }
+        });
+
+        stringRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
 
             }
         });
