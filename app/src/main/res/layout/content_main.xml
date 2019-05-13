@@ -110,7 +110,7 @@
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:layout_marginTop="12dp"
-                                    android:src="@drawable/workshop_img"/>
+                                    android:src="@mipmap/workshop_img"/>
 
                                 <TextView
                                     android:id="@+id/workshop_number"
@@ -165,7 +165,7 @@
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:layout_marginTop="12dp"
-                                    android:src="@drawable/speakers_img"/>
+                                    android:src="@mipmap/speakers_img"/>
 
                                 <TextView
                                     android:id="@+id/speakers_number"
@@ -228,7 +228,7 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_marginTop="12dp"
-                                android:src="@drawable/sponsors_img"/>
+                                android:src="@mipmap/sponsors_img"/>
 
                             <TextView
                                 android:id="@+id/sponsors_number"
@@ -283,7 +283,7 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_marginTop="12dp"
-                                android:src="@drawable/countries_img"/>
+                                android:src="@mipmap/countries_img"/>
 
                             <TextView
                                 android:id="@+id/countries_number"
