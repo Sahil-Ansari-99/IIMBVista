@@ -68,8 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                         profIntent.putExtra("Email", email);
                         startActivity(profIntent);
                     }else{
-                        Snackbar snackbar=Snackbar.make(linearLayout, "Incorrect Username or Password", Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                     }
                 }catch (Exception e){
                     e.printStackTrace();
