@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.iimbvista.iimbvista.Adapter.SponsorsAdapter;
+import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.Model.RootObject;
 import com.iimbvista.iimbvista.Model.Sponsors;
@@ -80,6 +81,9 @@ public class SponsorsActivity extends AppCompatActivity {
                     return true;
                 }else if(menuItem.getItemId() == R.id.nav_home){
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }else if(menuItem.getItemId() == R.id.nav_login) {
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    return true;
                 }
                 return false;
             }
