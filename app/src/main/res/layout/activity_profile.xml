@@ -73,4 +73,16 @@
         android:text="City :"
         android:textSize="24sp"/>
 
+    <TextView
+        android:id="@+id/profile_vcap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#FFFFFF"
+        android:text="VCAP :"
+        android:textSize="24sp"/>
+
 </LinearLayout>
