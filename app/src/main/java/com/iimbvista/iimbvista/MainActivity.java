@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
+import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }else if(menuItem.getItemId() == R.id.nav_home){
                     drawerLayout.closeDrawers();
+                }
+                else if(menuItem.getItemId() == R.id.nav_events){
+                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+                    return true;
                 }
                 return false;
             }

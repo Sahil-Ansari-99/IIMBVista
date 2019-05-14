@@ -28,6 +28,7 @@
         <activity android:name=".Sponsors.SponsorsActivity" />
         <activity android:name=".Register.RegisterActivity" />
         <activity android:name=".Register.RegisterationResult" />
+        <activity android:name=".Events.EventsMain"/>
         <activity android:name=".ConfirmEmail">
             <tools:validation testUrl="https://www.iimb-vista.com/2019/confirm_email.php" />
 
