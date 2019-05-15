@@ -30,8 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar=(Toolbar)findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_toggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        try {
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_toggle);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
         workshop_number=findViewById(R.id.workshop_number);
         speakers_number=findViewById(R.id.speakers_number);
