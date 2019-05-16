@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.iimbvista.iimbvista.Model.EventsModel;
 import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
+import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -61,16 +63,18 @@ public class EventsMain extends AppCompatActivity {
         }
 
         itemList=new ArrayList<>();
+
         loadList();
 
         carouselViewTop=(CarouselView)findViewById(R.id.events_main_carousel_top);
-        carouselViewTop.setPageCount(6);
-        carouselViewTop.setImageListener(new ImageListener() {
-            @Override
-            public void setImageForPosition(int position, ImageView imageView) {
-                imageView.setImageResource(R.drawable.vistalogo_dark);
-            }
-        });
+//        carouselViewTop.setPageCount(6);
+//        carouselViewTop.setImageListener(new ImageListener() {
+//            @Override
+//            public void setImageForPosition(int position, ImageView imageView) {
+////                Log.e("List", itemList.get(1).getUrl());
+//                imageView.setImageResource(R.drawable.vistalogo_dark);
+//            }
+//        });
 
 //            carouselViewTop.setImageListener(new ImageListener() {
 //                @Override
@@ -121,6 +125,7 @@ public class EventsMain extends AppCompatActivity {
     }
 
     private void loadList(){
+//        final List<EventsModel> eventsModelList=new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
             @Override
@@ -135,7 +140,21 @@ public class EventsMain extends AppCompatActivity {
                         JSONObject eventsObject = eventsArray.getJSONObject(i);
                         EventsModel event = new EventsModel(eventsObject.getString("title"),eventsObject.getString("url"),eventsObject.getString("date"),eventsObject.getString("time"),eventsObject.getString("description"),eventsObject.getString("location"),eventsObject.getString("cost"));
                         itemList.add(event);
+//                        Log.e("List", itemList.get(i).getUrl());
                     }
+
+                    carouselViewTop.setImageListener(new ImageListener() {
+                        @Override
+                        public void setImageForPosition(int position, ImageView imageView) {
+                            Log.e("List", itemList.get(position).getUrl());
+//                            imageView.setImageResource(R.drawable.vistalogo_dark);
+                            String urlToLoad=itemList.get(position).getUrl();
+
+                            Picasso.with(getApplicationContext()).load(urlToLoad).into(imageView);
+                        }
+                    });
+
+                    carouselViewTop.setPageCount(itemList.size());
 
                 }
                 catch (JSONException e)
@@ -152,6 +171,7 @@ public class EventsMain extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
+
     }
 
 }
