@@ -49,7 +49,7 @@
                     android:textColorHint="#7F8C8D">
 
                     <EditText
-                        android:id="@+id/login_password"
+                        android:id="@+id/forgot_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="First Name"

@@ -12,9 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.iimbvista.iimbvista.Model.EventsModel;
 import com.iimbvista.iimbvista.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +35,8 @@ public class Day3Fragment extends Fragment {
     RecyclerView fragRecyclerView;
     EventsFragmentAdapter adapter;
     List<EventsModel> itemList;
+
+    private static final String JSON_URL = "http://www.iimb-vista.com/2019/events.json";
 
     @Nullable
     @Override
@@ -39,15 +52,49 @@ public class Day3Fragment extends Fragment {
         fragRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         itemList=new ArrayList<>();
-
-        itemList.add(new EventsModel("Title","Title","Title","Title","Title","Title","Title"));
-        itemList.add(new EventsModel("Title","Title","Title","Title","Title","Title","Title"));
-        itemList.add(new EventsModel("Title","Title","Title","Title","Title","Title","Title"));
+        loadList();
 
         adapter=new EventsFragmentAdapter(getContext(), itemList);
         fragRecyclerView.setAdapter(adapter);
 
 
         return view;
+    }
+
+    private void loadList(){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject object = new JSONObject(response);
+                    JSONArray eventsArray = object.getJSONArray("Events");
+
+                    for(int i=0; i<eventsArray.length(); i++)
+                    {
+                        JSONObject eventsObject = eventsArray.getJSONObject(i);
+                        EventsModel event = new EventsModel(eventsObject.getString("title"),eventsObject.getString("url"),eventsObject.getString("date"),eventsObject.getString("time"),eventsObject.getString("description"),eventsObject.getString("location"),eventsObject.getString("cost"));
+                        itemList.add(event);
+                    }
+
+                    EventsFragmentAdapter adapter = new EventsFragmentAdapter(getContext(), itemList);
+                    fragRecyclerView.setAdapter(adapter);
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
     }
 }

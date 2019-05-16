@@ -38,9 +38,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<PlaceViewHolder>
         EventsModel eventsModelModel=itemList.get(i);
 
         String imgUrl=eventsModelModel.getUrl();
-
-//        Picasso.with(mContext).load(imgUrl).into(placeViewHolder.eventImage);
-        placeViewHolder.eventImage.setImageResource(R.mipmap.vistalogo_dark);
+        Picasso.with(mContext).load(imgUrl).into(placeViewHolder.eventImage);
 
 //        placeViewHolder.sponsorName.setText(sponsorsModel.getName());
         placeViewHolder.eventTitle.setText(eventsModelModel.getTitle());
@@ -65,3 +63,5 @@ class PlaceViewHolder extends RecyclerView.ViewHolder {
     }
 
 }
+
+

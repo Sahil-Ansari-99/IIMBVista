@@ -1,7 +1,6 @@
 package com.iimbvista.iimbvista;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,9 +32,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email=findViewById(R.id.login_email);
-        password=findViewById(R.id.login_password);
-        btn_login=findViewById(R.id.login_button);
+        email=findViewById(R.id.forgot_email);
+        password=findViewById(R.id.forgot_password);
+        btn_login=findViewById(R.id.change_password_button);
 
         linearLayout=(LinearLayout)findViewById(R.id.activity_login_layout);
 
@@ -78,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("Error", error.toString());
-                Toast.makeText(getApplicationContext(), "Error has occurred", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
             }
         });
 
