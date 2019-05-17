@@ -28,6 +28,7 @@ import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
 import org.json.JSONArray;
@@ -151,6 +152,20 @@ public class EventsMain extends AppCompatActivity {
                             String urlToLoad=itemList.get(position).getUrl();
 
                             Picasso.with(getApplicationContext()).load(urlToLoad).into(imageView);
+                        }
+                    });
+
+                    carouselViewTop.setImageClickListener(new ImageClickListener() {
+                        @Override
+                        public void onClick(int position) {
+                                Intent intent = new Intent(getApplicationContext(), PurchaseEventActivity.class);
+                                intent.putExtra("title",itemList.get(position).getTitle());
+                                intent.putExtra("date",itemList.get(position).getDate());
+                                intent.putExtra("time",itemList.get(position).getTime());
+                                intent.putExtra("description",itemList.get(position).getDescription());
+                                intent.putExtra("img_url",itemList.get(position).getUrl());
+                                intent.putExtra("cost", itemList.get(position).getCost());
+                                startActivity(intent);
                         }
                     });
 

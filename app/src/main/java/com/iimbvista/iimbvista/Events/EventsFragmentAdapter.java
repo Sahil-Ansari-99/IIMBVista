@@ -1,6 +1,7 @@
 package com.iimbvista.iimbvista.Events;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iimbvista.iimbvista.Model.EventsModel;
-import com.iimbvista.iimbvista.Model.Sponsors;
 import com.iimbvista.iimbvista.R;
 import com.squareup.picasso.Picasso;
 
@@ -34,11 +34,25 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<PlaceViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlaceViewHolder placeViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final PlaceViewHolder placeViewHolder, final int i) {
         EventsModel eventsModelModel=itemList.get(i);
 
         String imgUrl=eventsModelModel.getUrl();
         Picasso.with(mContext).load(imgUrl).into(placeViewHolder.eventImage);
+
+        placeViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PurchaseEventActivity.class);
+                intent.putExtra("title",itemList.get(i).getTitle());
+                intent.putExtra("date",itemList.get(i).getDate());
+                intent.putExtra("time",itemList.get(i).getTime());
+                intent.putExtra("description",itemList.get(i).getDescription());
+                intent.putExtra("img_url",itemList.get(i).getUrl());
+                intent.putExtra("cost", itemList.get(i).getCost());
+                v.getContext().startActivity(intent);
+            }
+        });
 
 //        placeViewHolder.sponsorName.setText(sponsorsModel.getName());
         placeViewHolder.eventTitle.setText(eventsModelModel.getTitle());
@@ -48,6 +62,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<PlaceViewHolder>
     public int getItemCount() {
         return itemList.size();
     }
+
 }
 
 class PlaceViewHolder extends RecyclerView.ViewHolder {

@@ -59,6 +59,7 @@ public class Day1Fragment extends Fragment {
         fragRecyclerView.setAdapter(adapter);
 
 
+
         return view;
     }
 

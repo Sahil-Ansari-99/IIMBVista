@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -32,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
         city=(TextView)findViewById(R.id.profile_city);
         college=(TextView)findViewById(R.id.profile_college);
         vcap=(TextView)findViewById(R.id.profile_vcap);
-        vista_id=(TextView)findViewById(R.id.profile_vista_id);
+        vista_id=(TextView)findViewById(R.id.event_title);
         emailText=(TextView)findViewById(R.id.profile_email);
 
         progressDialog=new ProgressDialog(this);

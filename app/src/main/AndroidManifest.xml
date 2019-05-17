@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".Events.PurchaseEventActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".LoginActivity" />
         <activity
@@ -29,7 +30,7 @@
         <activity android:name=".Sponsors.SponsorsActivity" />
         <activity android:name=".Register.RegisterActivity" />
         <activity android:name=".Register.RegisterationResult" />
-        <activity android:name=".Events.EventsMain"/>
+        <activity android:name=".Events.EventsMain" />
         <activity android:name=".ConfirmEmail">
             <tools:validation testUrl="https://www.iimb-vista.com/2019/confirm_email.php" />
 
