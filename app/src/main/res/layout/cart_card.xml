@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorHomeCard"
+    app:cardCornerRadius="5dp"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cart_card_title"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:gravity="center"
+            android:text="Event Title"
+            android:textColor="@color/colorHeads"
+            android:textSize="24sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:background="@color/colorHomeText" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cart_card_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="Event Cost"
+                android:textColor="@color/colorHeads"
+                android:textSize="18sp" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:foregroundGravity="center_horizontal"
+                app:backgroundTint="#000000"
+                app:maxImageSize="60dp"
+                app:rippleColor="#000000"
+                app:srcCompat="@drawable/ic_remove_item" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

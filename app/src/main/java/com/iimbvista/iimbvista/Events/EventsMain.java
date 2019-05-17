@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ public class EventsMain extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     private List<EventsModel> itemList;
+    Button button_cart;
 
     private static final String JSON_URL = "http://www.iimb-vista.com/2019/events.json";
 
@@ -63,8 +66,17 @@ public class EventsMain extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        itemList=new ArrayList<>();
+        button_cart = findViewById(R.id.button_cart);
+        button_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
 
+
+        itemList=new ArrayList<>();
         loadList();
 
         carouselViewTop=(CarouselView)findViewById(R.id.events_main_carousel_top);

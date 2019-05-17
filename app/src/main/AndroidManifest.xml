@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Events.PurchaseEventActivity"></activity>
+        <activity android:name=".Events.CartActivity"></activity>
+        <activity android:name=".Events.PurchaseEventActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".LoginActivity" />
