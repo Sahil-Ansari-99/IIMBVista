@@ -43,7 +43,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         String cost = cartModel.getCost();
 
         cardViewHolder.cardTitle.setText(title);
-        cardViewHolder.cardCost.setText(cost);
+        cardViewHolder.cardCost.setText("Cost: " + cost);
     }
 
     class CardViewHolder extends RecyclerView.ViewHolder {
