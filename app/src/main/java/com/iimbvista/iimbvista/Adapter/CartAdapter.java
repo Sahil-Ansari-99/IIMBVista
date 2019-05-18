@@ -21,9 +21,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Model.Cart;
 import com.iimbvista.iimbvista.Model.Sponsors;
 import com.iimbvista.iimbvista.R;
+import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -32,6 +34,7 @@ import java.util.StringTokenizer;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder> {
 
     private List<Cart> itemList;
+    CartAdapter cartAdapter;
 
     public CartAdapter(List<Cart> itemList) {
         this.itemList = itemList;
@@ -47,6 +50,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
     @Override
     public int getItemCount() {
         return itemList.size();
+    }
+
+    public int grandTotal(){
+        int totalPrice = 0;
+        for(int i=0; i<itemList.size(); i++)
+        {
+            totalPrice += Integer.parseInt(itemList.get(i).getCost());
+        }
+        return totalPrice;
     }
 
     @Override
@@ -86,6 +98,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 });
 
                 requestQueue.add(stringRequest);
+
             }
         });
 
@@ -94,6 +107,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
     class CardViewHolder extends RecyclerView.ViewHolder {
 
         TextView cardTitle, cardCost;
+        TextView cart_total;
         FloatingActionButton removeEvent;
 
         public CardViewHolder(View itemView) {
@@ -101,10 +115,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
             cardTitle = itemView.findViewById(R.id.cart_card_title);
             cardCost = itemView.findViewById(R.id.cart_card_cost);
             removeEvent = itemView.findViewById(R.id.btn_remove_event);
+            cart_total = itemView.findViewById(R.id.cart_total);
 
         }
     }
-
 
 }
 

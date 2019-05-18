@@ -1,11 +1,14 @@
 package com.iimbvista.iimbvista.Events;
 
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,6 +36,8 @@ public class CartActivity extends AppCompatActivity {
     CartAdapter cartAdapter;
     RecyclerView.LayoutManager layoutManager;
     List<Cart> cartList;
+    Button btn_purchase;
+    TextView cart_total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +50,20 @@ public class CartActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        btn_purchase = findViewById(R.id.btn_purchase);
+        cart_total = findViewById(R.id.cart_total);
 
         showCart("1");
 
     }
-
+    
     public void showCart(String vista_id)
     {
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
         String url="https://www.iimb-vista.com/2019/cart.php?vista_id="+vista_id;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
             @Override
             public void onResponse(String response) {
                 try {
@@ -71,12 +79,15 @@ public class CartActivity extends AppCompatActivity {
 
                         cartAdapter = new CartAdapter(cartList);
                         recyclerView.setAdapter(cartAdapter);
+
+                        int total = 0;
+                        total += cartAdapter.grandTotal();
+                        cart_total.setText("Total : "+ total);
                     }
 
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override

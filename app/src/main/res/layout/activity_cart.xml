@@ -16,7 +16,32 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/cart_recyclerView"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/cart_recyclerView">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/cart_total"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:text="Total : "
+        android:textColor="@color/colorHeads"
+        android:textSize="24sp" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:width="200dp"
+        android:background="@color/colorAccent"
+        android:text="Purchase Events"
+        android:textColor="#fff" />
 
 </LinearLayout>
