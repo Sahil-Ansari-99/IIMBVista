@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="Event Title"
             android:textColor="@color/colorHeads"
-            android:textSize="24sp" />
+            android:textSize="30sp" />
 
         <View
             android:layout_width="match_parent"
@@ -42,12 +42,12 @@
                 android:gravity="center"
                 android:text="Event Cost"
                 android:textColor="@color/colorHeads"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/floatingActionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/btn_remove_event"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="50dp"
                 android:layout_weight="1"

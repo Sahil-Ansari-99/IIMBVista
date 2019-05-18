@@ -75,13 +75,17 @@ public class PurchaseEventActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     Log.e("Add to Cart",response);
-                    if(response.equals("Success!"))
+                    if(response.equals("Item already present in cart!")){
+                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                    }
+                    else if(response.equals("Success!"))
                     {
                         Toast.makeText(getApplicationContext(),"Event added to cart!",Toast.LENGTH_SHORT).show();
                     }
                     else if(response.equals("Failed")){
                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
                     }
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }
