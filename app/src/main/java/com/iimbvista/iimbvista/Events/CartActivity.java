@@ -56,7 +56,7 @@ public class CartActivity extends AppCompatActivity {
         showCart("1");
 
     }
-    
+
     public void showCart(String vista_id)
     {
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
@@ -80,9 +80,20 @@ public class CartActivity extends AppCompatActivity {
                         cartAdapter = new CartAdapter(cartList);
                         recyclerView.setAdapter(cartAdapter);
 
-                        int total = 0;
-                        total += cartAdapter.grandTotal();
-                        cart_total.setText("Total : "+ total);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                while(true){
+                                    try {
+                                        Thread.sleep(500);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    int total = cartAdapter.grandTotal();
+                                    cart_total.setText("Total : "+ total);
+                                }
+                            }
+                        }).start();
                     }
 
                 }catch (Exception e){
@@ -97,6 +108,8 @@ public class CartActivity extends AppCompatActivity {
         });
 
         requestQueue.add(stringRequest);
-
     }
+
 }
+
+

@@ -59,6 +59,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
             totalPrice += Integer.parseInt(itemList.get(i).getCost());
         }
         return totalPrice;
+
     }
 
     @Override
