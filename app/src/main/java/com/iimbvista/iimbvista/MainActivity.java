@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 }else if(menuItem.getItemId() == R.id.nav_home){
                     drawerLayout.closeDrawers();
                 }
-                else if(menuItem.getItemId() == R.id.nav_events){
-                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_events){
+//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+//                    return true;
+//                }
                 return false;
             }
         });

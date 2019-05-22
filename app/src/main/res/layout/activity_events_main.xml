@@ -29,95 +29,92 @@
                 android:id="@+id/events_main_carousel_top"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="8dp"
                 app:fillColor="#fff"
                 app:pageColor="#000"
                 app:radius="6dp"
                 app:slideInterval="3000"
                 app:strokeColor="#FF777777"
-                app:strokeWidth="1dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="8dp" />
+                app:strokeWidth="1dp" />
 
             <!--<android.support.v7.widget.CardView-->
-                <!--android:id="@+id/events_main_card_1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="250dp"-->
-                <!--app:cardCornerRadius="5dp"-->
-                <!--android:layout_marginStart="0dp"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:layout_marginEnd="0dp"-->
-                <!--android:layout_marginBottom="8dp"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintHorizontal_bias="1.0"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/events_main_carousel_top"-->
-                <!--app:layout_constraintVertical_bias="0.0">-->
+            <!--android:id="@+id/events_main_card_1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="250dp"-->
+            <!--app:cardCornerRadius="5dp"-->
+            <!--android:layout_marginStart="0dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginEnd="0dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="1.0"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/events_main_carousel_top"-->
+            <!--app:layout_constraintVertical_bias="0.0">-->
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:orientation="vertical">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
 
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="Day 1"-->
-                        <!--android:textSize="25dp"-->
-                        <!--android:textStyle="bold"-->
-                        <!--android:layout_gravity="center_horizontal"/>-->
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Day 1"-->
+            <!--android:textSize="25dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_gravity="center_horizontal"/>-->
 
-                    <!--<com.synnapps.carouselview.CarouselView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="200dp"-->
-                        <!--android:id="@+id/events_main_carousel_day1"-->
-                        <!--android:layout_margin="5dp"-->
-                        <!--app:fillColor="#fff"-->
-                        <!--app:pageColor="#000"-->
-                        <!--app:radius="6dp"-->
-                        <!--app:slideInterval="3000"-->
-                        <!--app:strokeColor="#FF777777"-->
-                        <!--app:strokeWidth="1dp"/>-->
+            <!--<com.synnapps.carouselview.CarouselView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:id="@+id/events_main_carousel_day1"-->
+            <!--android:layout_margin="5dp"-->
+            <!--app:fillColor="#fff"-->
+            <!--app:pageColor="#000"-->
+            <!--app:radius="6dp"-->
+            <!--app:slideInterval="3000"-->
+            <!--app:strokeColor="#FF777777"-->
+            <!--app:strokeWidth="1dp"/>-->
 
-                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
             <!--</android.support.v7.widget.CardView>-->
 
-            <fragment
+            <FrameLayout
+                android:id="@+id/fragment_container_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:name="com.iimbvista.iimbvista.Events.Day1Fragment"
-                android:id="@+id/events_main_fragment_1" />
+                android:layout_height="match_parent">
+
+            </FrameLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorHomeText"
-                android:layout_margin="8dp"/>
+                android:layout_margin="8dp"
+                android:background="@color/colorHomeText" />
 
-            <fragment
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.iimbvista.iimbvista.Events.Day2Fragment"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:id="@+id/events_main_fragment_2" />
+                android:layout_height="match_parent"
+                android:id="@+id/fragment_container_2">
+
+            </FrameLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorHomeText"
-                android:layout_margin="8dp"/>
+                android:layout_margin="8dp"
+                android:background="@color/colorHomeText" />
 
-            <fragment
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:name="com.iimbvista.iimbvista.Events.Day3Fragment"
-                android:id="@+id/events_main_fragment_3" />
+                android:layout_height="match_parent"
+                android:id="@+id/fragment_container_3">
+
+            </FrameLayout>
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/button_cart"

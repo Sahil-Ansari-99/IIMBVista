@@ -38,10 +38,17 @@ public class Day3Fragment extends Fragment {
 
     private static final String JSON_URL = "http://www.iimb-vista.com/2019/events.json";
 
+    public Day3Fragment()
+    {
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.events_fragment, container, false);
+
+        String vista_id = getArguments().getString("vista_id");
 
         fragTitle=(TextView)view.findViewById(R.id.events_fragment_title);
         fragTitle.setText("Day 3");
@@ -52,16 +59,16 @@ public class Day3Fragment extends Fragment {
         fragRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         itemList=new ArrayList<>();
-        loadList();
+        loadList(vista_id);
 
-        adapter=new EventsFragmentAdapter(getContext(), itemList);
+        adapter=new EventsFragmentAdapter(getContext(), itemList, vista_id);
         fragRecyclerView.setAdapter(adapter);
 
 
         return view;
     }
 
-    private void loadList(){
+    private void loadList(final String vista_id){
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
             @Override
@@ -78,7 +85,7 @@ public class Day3Fragment extends Fragment {
                         itemList.add(event);
                     }
 
-                    EventsFragmentAdapter adapter = new EventsFragmentAdapter(getContext(), itemList);
+                    EventsFragmentAdapter adapter = new EventsFragmentAdapter(getContext(), itemList, vista_id);
                     fragRecyclerView.setAdapter(adapter);
 
                 }

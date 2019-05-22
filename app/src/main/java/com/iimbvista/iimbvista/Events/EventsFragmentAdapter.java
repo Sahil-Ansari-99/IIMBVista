@@ -20,10 +20,12 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<PlaceViewHolder>
 
     private Context mContext;
     private List<EventsModel> itemList;
+    String vista_id;
 
-    public EventsFragmentAdapter(Context mContext, List<EventsModel> itemList) {
+    public EventsFragmentAdapter(Context mContext, List<EventsModel> itemList, String vista_id) {
         this.mContext = mContext;
         this.itemList = itemList;
+        this.vista_id = vista_id;
     }
 
     @Override
@@ -50,6 +52,8 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<PlaceViewHolder>
                 intent.putExtra("description",itemList.get(i).getDescription());
                 intent.putExtra("img_url",itemList.get(i).getUrl());
                 intent.putExtra("cost", itemList.get(i).getCost());
+                intent.putExtra("location", itemList.get(i).getLocation());
+                intent.putExtra("vista_id", vista_id);
                 v.getContext().startActivity(intent);
             }
         });

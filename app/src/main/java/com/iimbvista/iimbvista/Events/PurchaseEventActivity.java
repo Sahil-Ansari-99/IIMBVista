@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 
 public class PurchaseEventActivity extends AppCompatActivity {
 
-    TextView event_title, event_description, event_cost, event_date, event_time;
+    TextView event_title, event_description, event_cost, event_date, event_time, event_location;
     ImageView event_image;
     Button button_add_event;
 
@@ -37,6 +37,7 @@ public class PurchaseEventActivity extends AppCompatActivity {
         event_cost = findViewById(R.id.event_cost);
         event_description = findViewById(R.id.event_description);
         event_date = findViewById(R.id.event_date);
+        event_location = findViewById(R.id.event_location);
         event_time = findViewById(R.id.event_time);
         event_image = findViewById(R.id.event_image);
         button_add_event = findViewById(R.id.button_add_event);
@@ -45,21 +46,24 @@ public class PurchaseEventActivity extends AppCompatActivity {
         final String cost = getIntent().getStringExtra("cost");
         String description = getIntent().getStringExtra("description");
         String date = getIntent().getStringExtra("date");
+        String location = getIntent().getStringExtra("location");
         String time = getIntent().getStringExtra("time");
         String img_url = getIntent().getStringExtra("img_url");
+        final String vista_id = getIntent().getStringExtra("vista_id");
 
         event_title.append(title);
         event_time.append(time);
         event_date.append(date);
         event_description.append(description);
         event_cost.append(cost);
+        event_location.append(location);
 
         Picasso.with(getApplicationContext()).load(img_url).into(event_image);
 
         button_add_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToCart("1",title,cost);
+                addToCart(vista_id,title,cost);
             }
         });
 

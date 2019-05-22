@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -46,6 +50,7 @@ public class EventsMain extends AppCompatActivity {
     Toolbar toolbar;
     private List<EventsModel> itemList;
     Button button_cart;
+    FragmentManager fragmentManager;
 
     private static final String JSON_URL = "http://www.iimb-vista.com/2019/events.json";
 
@@ -66,18 +71,36 @@ public class EventsMain extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        final String email = getIntent().getStringExtra("email");
+        final String vista_id = getIntent().getStringExtra("vista_id");
+
+        Bundle bundle = new Bundle();
+        bundle.putString("vista_id", vista_id);
+        fragmentManager = getSupportFragmentManager();
+        Day1Fragment day1Fragment = new Day1Fragment();
+        Day2Fragment day2Fragment = new Day2Fragment();
+        Day3Fragment day3Fragment = new Day3Fragment();
+        day1Fragment.setArguments(bundle);
+        day2Fragment.setArguments(bundle);
+        day3Fragment.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.fragment_container_1,day1Fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container_2,day2Fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container_3,day3Fragment).commit();
+
         button_cart = findViewById(R.id.button_cart);
         button_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                intent.putExtra("vista_id", vista_id);
+                intent.putExtra("email", email);
                 startActivity(intent);
             }
         });
 
 
         itemList=new ArrayList<>();
-        loadList();
+        loadList(vista_id);
 
         carouselViewTop=(CarouselView)findViewById(R.id.events_main_carousel_top);
 //        carouselViewTop.setPageCount(6);
@@ -115,9 +138,10 @@ public class EventsMain extends AppCompatActivity {
                 else if(menuItem.getItemId() == R.id.nav_login) {
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     return true;
-                }else if(menuItem.getItemId() == R.id.nav_events){
-                    drawerLayout.closeDrawers();
                 }
+//                else if(menuItem.getItemId() == R.id.nav_events){
+//                    drawerLayout.closeDrawers();
+//                }
                 else if(menuItem.getItemId() == R.id.nav_home){
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
@@ -137,7 +161,7 @@ public class EventsMain extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadList(){
+    private void loadList(final String vista_id){
 //        final List<EventsModel> eventsModelList=new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
@@ -177,6 +201,8 @@ public class EventsMain extends AppCompatActivity {
                                 intent.putExtra("description",itemList.get(position).getDescription());
                                 intent.putExtra("img_url",itemList.get(position).getUrl());
                                 intent.putExtra("cost", itemList.get(position).getCost());
+                                intent.putExtra("location", itemList.get(position).getLocation());
+                                intent.putExtra("vista_id", vista_id);
                                 startActivity(intent);
                         }
                     });

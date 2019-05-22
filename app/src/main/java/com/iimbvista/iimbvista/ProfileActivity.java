@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -16,11 +18,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.Model.ProfileModel;
+import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView name, city, college, vcap, vista_id, emailText;
     ProgressDialog progressDialog;
+    Button btn_events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +38,29 @@ public class ProfileActivity extends AppCompatActivity {
         vcap=(TextView)findViewById(R.id.profile_vcap);
         vista_id=(TextView)findViewById(R.id.event_title);
         emailText=(TextView)findViewById(R.id.profile_email);
+        btn_events = findViewById(R.id.btn_events);
 
         progressDialog=new ProgressDialog(this);
         progressDialog.show();
 
         Intent intent=getIntent();
-        String profEmail=intent.getStringExtra("Email");
+        final String profEmail=intent.getStringExtra("Email");
 
         getProfileDetails(profEmail);
+
+        btn_events.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), EventsMain.class);
+                intent.putExtra("email", profEmail);
+                intent.putExtra("vista_id", vista_id.getText().toString().split(": ")[1]);
+                startActivity(intent);
+            }
+        });
     }
 
     public void getProfileDetails(String email){
-        String profile_url="https://www.iimb-vista.com/2019/app_profile.php/?email="+email;
+        String profile_url="https://www.iimb-vista.com/2019/profile_old.php/?email="+email;
 
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
 
