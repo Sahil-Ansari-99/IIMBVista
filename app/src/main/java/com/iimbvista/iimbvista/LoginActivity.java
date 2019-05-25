@@ -1,5 +1,6 @@
 package com.iimbvista.iimbvista;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText email,password;
     Button btn_login;
     LinearLayout linearLayout;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         password=findViewById(R.id.forgot_password);
         btn_login=findViewById(R.id.change_password_button);
 
+        progressDialog = new ProgressDialog(LoginActivity.this);
+
         linearLayout=(LinearLayout)findViewById(R.id.activity_login_layout);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userEmail=email.getText().toString();
                 String userPassword=password.getText().toString();
+                progressDialog.setMessage("Logging In...");
+                progressDialog.show();
                 loginUser(userEmail, userPassword);
             }
         });
@@ -56,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                progressDialog.dismiss();
                 Log.e("Response", response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -76,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 Log.e("Error", error.toString());
                 Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
             }

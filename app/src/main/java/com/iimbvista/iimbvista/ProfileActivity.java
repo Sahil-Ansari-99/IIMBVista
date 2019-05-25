@@ -60,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void getProfileDetails(String email){
-        String profile_url="https://www.iimb-vista.com/2019/profile_old.php/?email="+email;
+        String profile_url="https://www.iimb-vista.com/2019/app_profile.php/?email="+email;
 
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
 

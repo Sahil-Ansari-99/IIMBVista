@@ -43,8 +43,8 @@
 
                 <data
                     android:host="www.iimb-vista.com"
-                    android:pathPrefix="/2019/confirm_email.php"
-                    android:scheme="https" />
+                    android:scheme="https"
+                    android:pathPrefix="/2019/wp_db_entry.php" />
             </intent-filter>
         </activity>
     </application>
