@@ -1,6 +1,7 @@
 package com.iimbvista.iimbvista.Sponsors;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -82,8 +84,14 @@ public class SponsorsActivity extends AppCompatActivity {
                 }else if(menuItem.getItemId() == R.id.nav_home){
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }else if(menuItem.getItemId() == R.id.nav_login) {
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    return true;
+                    SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+                    if(profPref.getBoolean("Logged", false)){
+                        Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
+                        return true;
+                    }else{
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        return true;
+                    }
                 }
                 return false;
             }

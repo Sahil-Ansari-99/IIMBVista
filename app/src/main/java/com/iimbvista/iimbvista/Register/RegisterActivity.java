@@ -1,10 +1,16 @@
 package com.iimbvista.iimbvista.Register;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
@@ -22,7 +28,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.iimbvista.iimbvista.LoginActivity;
+import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.R;
+import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
 import org.json.JSONObject;
 
@@ -38,11 +47,25 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressBar progressBar;
     private ProgressBar spinner;
     boolean regResult=true;
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registeration);
+        setContentView(R.layout.activity_register_drawer);
+
+        drawerLayout=(DrawerLayout)findViewById(R.id.register_drawer_layout);
+
+        toolbar=(Toolbar)findViewById(R.id.register_toolbar);
+        setSupportActionBar(toolbar);
+
+        try {
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_toggle);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
         first_name=(EditText)findViewById(R.id.forgot_password);
         last_name=findViewById(R.id.input_last_name);
@@ -88,6 +111,38 @@ public class RegisterActivity extends AppCompatActivity {
                     }
 
                 }
+            }
+        });
+
+        NavigationView navigationView=(NavigationView)findViewById(R.id.register_nav_view);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.nav_sponsors){
+                    startActivity(new Intent(getApplicationContext(), SponsorsActivity.class));
+                    return true;
+                }else if(menuItem.getItemId() == R.id.nav_register){
+                    drawerLayout.closeDrawers();
+                }
+                else if(menuItem.getItemId() == R.id.nav_login) {
+                    SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+                    if(profPref.getBoolean("Logged", false)){
+                        Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
+                        return true;
+                    }else{
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        return true;
+                    }
+                }else if(menuItem.getItemId() == R.id.nav_home){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    return true;
+                }
+//                else if(menuItem.getItemId() == R.id.nav_events){
+//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+//                    return true;
+//                }
+                return false;
             }
         });
     }
