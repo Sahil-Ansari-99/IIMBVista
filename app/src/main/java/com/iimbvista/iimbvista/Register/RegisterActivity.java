@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -28,8 +29,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
+import com.iimbvista.iimbvista.ProfileActivity;
 import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
@@ -116,6 +119,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         NavigationView navigationView=(NavigationView)findViewById(R.id.register_nav_view);
 
+        updateMenu(navigationView.getMenu());
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -138,10 +143,21 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
-//                else if(menuItem.getItemId() == R.id.nav_events){
-//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-//                    return true;
-//                }
+                else if(menuItem.getItemId() == R.id.nav_events){
+                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_profile){
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_logout){
+                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+                    profEditor.putBoolean("Logged", false);
+                    profEditor.apply();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    return true;
+                }
                 return false;
             }
         });
@@ -172,6 +188,19 @@ public class RegisterActivity extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
         return nonceId;
+    }
+
+    public void updateMenu(Menu menu){
+        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+        if(profPref.getBoolean("Logged", false)){
+            menu.findItem(R.id.nav_login).setVisible(false);
+            menu.findItem(R.id.nav_logout).setVisible(true);
+            menu.findItem(R.id.nav_profile).setVisible(true);
+        }else{
+            menu.findItem(R.id.nav_login).setVisible(true);
+            menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_profile).setVisible(false);
+        }
     }
 
     public void registerUser(String name, String password, String email, String nonce){
