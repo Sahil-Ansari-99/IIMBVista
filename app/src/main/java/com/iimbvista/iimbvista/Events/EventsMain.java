@@ -91,16 +91,20 @@ public class EventsMain extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.fragment_container_3,day3Fragment).commit();
 
         button_cart = findViewById(R.id.button_cart);
-        button_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-                intent.putExtra("vista_id", vista_id);
-                intent.putExtra("email", email);
-                startActivity(intent);
-            }
-        });
-
+            button_cart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (vista_id != null) {
+                        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                        intent.putExtra("vista_id", vista_id);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Please login to access cart!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
         itemList=new ArrayList<>();
         loadList(vista_id);

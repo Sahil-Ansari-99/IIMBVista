@@ -3,6 +3,7 @@ package com.iimbvista.iimbvista;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
@@ -19,11 +22,19 @@ import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     TextView workshop_number,sponsors_number,countries_number,speakers_number;
+    TextView tv_days, tv_hours, tv_minutes, tv_seconds;
     Toolbar toolbar;
+    LinearLayout timer_layout;
+    View timer_view;
     public static boolean isAppRunning=false;
+    private Handler handler;
+    private Runnable runnable;
     Menu menu;
 
     @Override
@@ -32,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         drawerLayout=(DrawerLayout)findViewById(R.id.home_drawer_layout);
+
+        tv_days = findViewById(R.id.txtDays);
+        tv_hours = findViewById(R.id.txtHours);
+        tv_minutes = findViewById(R.id.txtMinutes);
+        tv_seconds = findViewById(R.id.txtSeconds);
+        timer_layout = findViewById(R.id.timer_layout);
+        timer_view = findViewById(R.id.timer_view);
+
+        countDownStart();
 
         toolbar=(Toolbar)findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
@@ -99,6 +119,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void countDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                try {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(
+                            "yyyy-MM-dd");
+                    // Please here set your event date//YYYY-MM-DD
+                    Date futureDate = dateFormat.parse("2019-7-26");
+                    Date currentDate = new Date();
+                    if (!currentDate.after(futureDate)) {
+                        long diff = futureDate.getTime()
+                                - currentDate.getTime();
+                        diff += 32410000;
+                        long days = diff / (24 * 60 * 60 * 1000);
+                        diff -= days * (24 * 60 * 60 * 1000);
+                        long hours = diff / (60 * 60 * 1000);
+                        diff -= hours * (60 * 60 * 1000);
+                        long minutes = diff / (60 * 1000);
+                        diff -= minutes * (60 * 1000);
+                        long seconds = diff / 1000;
+                        tv_days.setText("" + String.format("%02d", days));
+                        tv_hours.setText("" + String.format("%02d", hours));
+                        tv_minutes.setText(""
+                                + String.format("%02d", minutes));
+                        tv_seconds.setText(""
+                                + String.format("%02d", seconds));
+                    } else {
+                        timer_layout.setVisibility(View.GONE);
+                        timer_view.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 1 * 1000);
+    }
+
+
+
     public void animateTextView(int initialValue, int finalValue, final TextView  textview) {
         ValueAnimator valueAnimator = ValueAnimator.ofInt(initialValue, finalValue);
         valueAnimator.setDuration(2000);
@@ -137,6 +200,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -168,4 +233,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         isAppRunning=false;
     }
+
 }

@@ -158,6 +158,9 @@ public class ProfileActivity extends AppCompatActivity {
                 vista_id.setText("Vista ID: "+model.getVista_id());
                 city.setText("City: "+model.getCity());
                 college.setText("College: "+model.getCollege());
+
+                if(model.getVcap() == null)
+                vcap.setVisibility(View.GONE);
             }
         }, new Response.ErrorListener() {
             @Override

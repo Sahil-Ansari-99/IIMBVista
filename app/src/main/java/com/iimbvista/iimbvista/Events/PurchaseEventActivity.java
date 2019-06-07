@@ -23,7 +23,6 @@ import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Register.RegisterationResult;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-import com.yinglan.shadowimageview.ShadowImageView;
 
 public class PurchaseEventActivity extends AppCompatActivity {
 
@@ -79,12 +78,17 @@ public class PurchaseEventActivity extends AppCompatActivity {
 
         Picasso.with(getApplicationContext()).load(img_url).into(event_image);
 
-        button_add_event.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addToCart(vista_id,title,cost);
-            }
-        });
+            button_add_event.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (vista_id != null) {
+                        addToCart(vista_id, title, cost);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Please login to add events to cart!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
     }
 
