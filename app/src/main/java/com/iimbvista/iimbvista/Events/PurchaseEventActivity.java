@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,17 +22,19 @@ import com.android.volley.toolbox.Volley;
 import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Register.RegisterationResult;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 public class PurchaseEventActivity extends AppCompatActivity {
 
     TextView event_title, event_description, event_cost, event_date, event_time, event_location;
     ImageView event_image;
+    ImageButton expand_button;
     Button button_add_event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
+        setContentView(R.layout.activity_event_new);
 
         event_title = findViewById(R.id.event_title);
         event_cost = findViewById(R.id.event_cost);
@@ -41,10 +44,11 @@ public class PurchaseEventActivity extends AppCompatActivity {
         event_time = findViewById(R.id.event_time);
         event_image = findViewById(R.id.event_image);
         button_add_event = findViewById(R.id.button_add_event);
+        expand_button = findViewById(R.id.expand_button);
 
         final String title = getIntent().getStringExtra("title");
         final String cost = getIntent().getStringExtra("cost");
-        String description = getIntent().getStringExtra("description");
+        final String description = getIntent().getStringExtra("description");
         String date = getIntent().getStringExtra("date");
         String location = getIntent().getStringExtra("location");
         String time = getIntent().getStringExtra("time");
@@ -55,17 +59,36 @@ public class PurchaseEventActivity extends AppCompatActivity {
         event_time.append(time);
         event_date.append(date);
         event_description.append(description);
-        event_cost.append(cost);
+        event_cost.append("₹" +cost);
         event_location.append(location);
+
+        expand_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (event_description.getVisibility() == View.VISIBLE) {
+                    event_description.setVisibility(View.GONE);
+                    expand_button.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
+                }
+                else if (event_description.getVisibility() == View.GONE) {
+                    event_description.setVisibility(View.VISIBLE);
+                    expand_button.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp);
+                }
+            }
+        });
 
         Picasso.with(getApplicationContext()).load(img_url).into(event_image);
 
-        button_add_event.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addToCart(vista_id,title,cost);
-            }
-        });
+            button_add_event.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (vista_id != null) {
+                        addToCart(vista_id, title, cost);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Please login to add events to cart!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
     }
 

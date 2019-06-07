@@ -166,6 +166,7 @@ public class CartActivity extends AppCompatActivity {
         });
 
         requestQueue.add(stringRequest);
+        btn_purchase.setClickable(false);
     }
 
 }
