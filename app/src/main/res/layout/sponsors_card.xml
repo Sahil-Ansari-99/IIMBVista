@@ -35,7 +35,8 @@
             android:layout_height="100dp"
             android:src="@drawable/vistalogo_dark"
             android:layout_margin="5dp"
-            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:id="@+id/sponsors_card_img"/>
 
         <!--<TextView-->

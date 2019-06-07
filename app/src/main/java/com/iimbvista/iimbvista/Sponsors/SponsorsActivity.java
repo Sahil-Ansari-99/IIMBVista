@@ -1,6 +1,7 @@
 package com.iimbvista.iimbvista.Sponsors;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,10 +25,12 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.iimbvista.iimbvista.Adapter.SponsorsAdapter;
+import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.Model.RootObject;
 import com.iimbvista.iimbvista.Model.Sponsors;
+import com.iimbvista.iimbvista.ProfileActivity;
 import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 
@@ -71,6 +76,8 @@ public class SponsorsActivity extends AppCompatActivity {
 
         NavigationView navigationView=(NavigationView)findViewById(R.id.sponsors_nav_view);
 
+        updateMenu(navigationView.getMenu());
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -82,7 +89,28 @@ public class SponsorsActivity extends AppCompatActivity {
                 }else if(menuItem.getItemId() == R.id.nav_home){
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }else if(menuItem.getItemId() == R.id.nav_login) {
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+                    if(profPref.getBoolean("Logged", false)){
+                        Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
+                        return true;
+                    }else{
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        return true;
+                    }
+                }
+                else if(menuItem.getItemId() == R.id.nav_events){
+                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_profile){
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_logout){
+                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+                    profEditor.putBoolean("Logged", false);
+                    profEditor.apply();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
                 return false;
@@ -109,6 +137,19 @@ public class SponsorsActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(stringRequest);
+    }
+
+    public void updateMenu(Menu menu){
+        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+        if(profPref.getBoolean("Logged", false)){
+            menu.findItem(R.id.nav_login).setVisible(false);
+            menu.findItem(R.id.nav_logout).setVisible(true);
+            menu.findItem(R.id.nav_profile).setVisible(true);
+        }else{
+            menu.findItem(R.id.nav_login).setVisible(true);
+            menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_profile).setVisible(false);
+        }
     }
 
     @Override

@@ -33,7 +33,7 @@
         <activity android:name=".Register.RegisterationResult" />
         <activity android:name=".Events.EventsMain" />
         <activity android:name=".ConfirmEmail">
-            <tools:validation testUrl="https://www.iimb-vista.com/2019/confirm_email.php" />
+            <tools:validation testUrl="https://www.iimb-vista.com/2019/wp_db_entry.php" />
 
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -47,6 +47,21 @@
                     android:pathPrefix="/2019/wp_db_entry.php" />
             </intent-filter>
         </activity>
+
+        <service android:name=".NotificationService.NotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!--<service android:name=".NotificationService.InstanceIdService"-->
+            <!--android:permission="com.google.android.c2dm.permission.SEND">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>-->
+                <!--<action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+
     </application>
 
 </manifest>

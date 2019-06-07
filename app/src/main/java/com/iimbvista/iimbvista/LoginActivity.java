@@ -2,9 +2,17 @@ package com.iimbvista.iimbvista;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +25,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.iimbvista.iimbvista.Events.EventsMain;
+import com.iimbvista.iimbvista.Register.RegisterActivity;
+import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
 import org.json.JSONObject;
 
@@ -28,11 +39,25 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_login;
     LinearLayout linearLayout;
     ProgressDialog progressDialog;
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_drawer);
+
+        drawerLayout=(DrawerLayout)findViewById(R.id.login_drawer_layout);
+
+        toolbar=(Toolbar)findViewById(R.id.login_toolbar);
+        setSupportActionBar(toolbar);
+
+        try {
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_toggle);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
         email=findViewById(R.id.forgot_email);
         password=findViewById(R.id.forgot_password);
@@ -52,6 +77,46 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(userEmail, userPassword);
             }
         });
+
+        NavigationView navigationView=(NavigationView)findViewById(R.id.login_nav_view);
+
+        updateMenu(navigationView.getMenu());
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.nav_sponsors){
+                    startActivity(new Intent(getApplicationContext(), SponsorsActivity.class));
+                    return true;
+                }else if(menuItem.getItemId() == R.id.nav_register){
+                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_login) {
+                    drawerLayout.closeDrawers();
+                }else if(menuItem.getItemId() == R.id.nav_home){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_events){
+                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_profile){
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_logout){
+                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+                    profEditor.putBoolean("Logged", false);
+                    profEditor.apply();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     public void loginUser(final String email, String password){
@@ -72,7 +137,12 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Log In Successful", Toast.LENGTH_LONG).show();
                         Intent profIntent = new Intent(getApplicationContext(), ProfileActivity.class);
                         profIntent.putExtra("Email", email);
+                        SharedPreferences.Editor profPref = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+                        profPref.putString("Email", email);
+                        profPref.putBoolean("Logged", true);
+                        profPref.apply();
                         startActivity(profIntent);
+                        finish();
                     }else{
                         Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                     }
@@ -90,5 +160,28 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         requestQueue.add(stringRequest);
+    }
+
+    public void updateMenu(Menu menu){
+        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+        if(profPref.getBoolean("Logged", false)){
+            menu.findItem(R.id.nav_login).setVisible(false);
+            menu.findItem(R.id.nav_logout).setVisible(true);
+            menu.findItem(R.id.nav_profile).setVisible(true);
+        }else{
+            menu.findItem(R.id.nav_login).setVisible(true);
+            menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_profile).setVisible(false);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
