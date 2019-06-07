@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "611376709094",
+    "firebase_url": "https://iimb-vista.firebaseio.com",
+    "project_id": "iimb-vista",
+    "storage_bucket": "iimb-vista.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611376709094:android:dfa6212bf7dc623b",
+        "android_client_info": {
+          "package_name": "com.iimbvista.iimbvista"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611376709094-6e4ki3nll4f0bakck824l6sfpt0vidms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD_oPbRZA5xQkJ-hwFcOeNYPIDJRxCVaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611376709094-6e4ki3nll4f0bakck824l6sfpt0vidms.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
