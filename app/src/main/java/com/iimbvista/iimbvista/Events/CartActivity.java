@@ -160,9 +160,9 @@ public class CartActivity extends AppCompatActivity {
                         String lat = stringTokenizer.nextToken();
                         Gson gson=new Gson();
                         Cart cartModel=gson.fromJson(lat, new TypeToken<Cart>(){}.getType());
-                        Cart entry = new Cart(cartModel.getTitle(),cartModel.getCost());
+                        String title = cartModel.getTitle().replace("_", " ");
+                        Cart entry = new Cart(title,cartModel.getCost());
                         cartList.add(entry);
-
                         cartAdapter = new CartAdapter(cartList, vista_id, cart_total);
                         recyclerView.setAdapter(cartAdapter);
 

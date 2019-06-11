@@ -25,6 +25,8 @@ import com.iimbvista.iimbvista.Register.RegisterationResult;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.util.StringTokenizer;
+
 public class PurchaseEventActivity extends AppCompatActivity {
 
     TextView event_title, event_description, event_cost, event_date, event_time, event_location;
@@ -102,6 +104,9 @@ public class PurchaseEventActivity extends AppCompatActivity {
 
     public void addToCart(String vista_id, String title, String cost)
     {
+        title = title.replace(" ", "_");
+        Log.e("Passed String", title);
+
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
         String url="https://www.iimb-vista.com/2019/add_to_cart.php?vista_id="+vista_id+"&event="+title+"&cost="+cost;
 

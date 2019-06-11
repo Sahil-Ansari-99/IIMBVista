@@ -79,8 +79,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         cardViewHolder.removeEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String title1 = title.replace(" ", "_");
                 RequestQueue requestQueue= Volley.newRequestQueue(v.getContext());
-                String url="https://www.iimb-vista.com/2019/remove_from_cart.php?vista_id="+vista_id+"&event="+title;
+                String url="https://www.iimb-vista.com/2019/remove_from_cart.php?vista_id="+vista_id+"&event="+title1;
                 final Context context = v.getContext();
                 StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
