@@ -143,7 +143,7 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
-    public void showCart(String vista_id)
+    public void showCart(final String vista_id)
     {
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
         String url="https://www.iimb-vista.com/2019/cart.php?vista_id="+vista_id;
@@ -163,23 +163,9 @@ public class CartActivity extends AppCompatActivity {
                         Cart entry = new Cart(cartModel.getTitle(),cartModel.getCost());
                         cartList.add(entry);
 
-                        cartAdapter = new CartAdapter(cartList);
+                        cartAdapter = new CartAdapter(cartList, vista_id, cart_total);
                         recyclerView.setAdapter(cartAdapter);
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                    try {
-                                        Thread.sleep(500);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    int total = cartAdapter.grandTotal();
-                                    cart_total.setText("Total : "+ total);
-
-                            }
-                        });
                     }
 
                 }catch (Exception e){

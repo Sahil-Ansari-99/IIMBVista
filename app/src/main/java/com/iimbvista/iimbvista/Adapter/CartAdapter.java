@@ -34,10 +34,13 @@ import java.util.StringTokenizer;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder> {
 
     private List<Cart> itemList;
-    CartAdapter cartAdapter;
+    String vista_id;
+    TextView cart_total;
 
-    public CartAdapter(List<Cart> itemList) {
+    public CartAdapter(List<Cart> itemList, String vista_id, TextView cart_total) {
         this.itemList = itemList;
+        this.vista_id = vista_id;
+        this.cart_total = cart_total;
     }
 
     @NonNull
@@ -63,7 +66,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardViewHolder cardViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final CardViewHolder cardViewHolder, int i) {
         final Cart cartModel = itemList.get(i);
         final String title = cartModel.getTitle();
         String cost = cartModel.getCost();
@@ -71,12 +74,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
 
         cardViewHolder.cardTitle.setText(title);
         cardViewHolder.cardCost.setText("Cost: " + cost);
+        cart_total.setText("Total: " + grandTotal());
 
         cardViewHolder.removeEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RequestQueue requestQueue= Volley.newRequestQueue(v.getContext());
-                String url="https://www.iimb-vista.com/2019/remove_from_cart.php?vista_id=1&event="+title;
+                String url="https://www.iimb-vista.com/2019/remove_from_cart.php?vista_id="+vista_id+"&event="+title;
                 final Context context = v.getContext();
                 StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
@@ -87,6 +91,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                             notifyItemRemoved(position);
                             notifyItemRangeChanged(position, itemList.size());
                             Toast.makeText(context, response,Toast.LENGTH_SHORT).show();
+                            cart_total.setText("Total: " + grandTotal());
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -99,7 +104,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 });
 
                 requestQueue.add(stringRequest);
-
             }
         });
 
@@ -108,7 +112,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
     class CardViewHolder extends RecyclerView.ViewHolder {
 
         TextView cardTitle, cardCost;
-        TextView cart_total;
         FloatingActionButton removeEvent;
 
         public CardViewHolder(View itemView) {
@@ -116,7 +119,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
             cardTitle = itemView.findViewById(R.id.cart_card_title);
             cardCost = itemView.findViewById(R.id.cart_card_cost);
             removeEvent = itemView.findViewById(R.id.btn_remove_event);
-            cart_total = itemView.findViewById(R.id.cart_total);
 
         }
     }
