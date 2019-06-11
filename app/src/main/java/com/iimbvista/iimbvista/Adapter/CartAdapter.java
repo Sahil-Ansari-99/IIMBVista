@@ -57,9 +57,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
 
     public int grandTotal(){
         int totalPrice = 0;
-        for(int i=0; i<itemList.size(); i++)
-        {
-            totalPrice += Integer.parseInt(itemList.get(i).getCost());
+        for(int i=0; i<itemList.size(); i++) {
+            if (!itemList.get(i).getCost().isEmpty()) {
+                totalPrice += Integer.parseInt(itemList.get(i).getCost());
+            }
+
         }
         return totalPrice;
 
