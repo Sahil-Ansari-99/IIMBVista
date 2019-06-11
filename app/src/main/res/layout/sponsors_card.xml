@@ -34,7 +34,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/vistalogo_dark"
+            android:src="@mipmap/vistalogo_dark"
             android:layout_margin="5dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"

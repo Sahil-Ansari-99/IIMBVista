@@ -1,6 +1,7 @@
 package com.iimbvista.iimbvista.Events;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class PurchaseEventActivity extends AppCompatActivity {
     ImageView event_image;
     ImageButton expand_button;
     Button button_add_event;
+    String vista_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,13 @@ public class PurchaseEventActivity extends AppCompatActivity {
         String location = getIntent().getStringExtra("location");
         String time = getIntent().getStringExtra("time");
         String img_url = getIntent().getStringExtra("img_url");
-        final String vista_id = getIntent().getStringExtra("vista_id");
+
+        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+        if(profPref.getBoolean("Logged", false)) {
+            vista_id = profPref.getString("vista_id", null);
+        }else{
+            vista_id = null;
+        }
 
         event_title.append(title);
         event_time.append(time);

@@ -29,6 +29,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
@@ -149,6 +150,10 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_cart){
+                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
                     return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_logout){

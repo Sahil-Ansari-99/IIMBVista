@@ -167,10 +167,12 @@ public class LoginActivity extends AppCompatActivity {
         if(profPref.getBoolean("Logged", false)){
             menu.findItem(R.id.nav_login).setVisible(false);
             menu.findItem(R.id.nav_logout).setVisible(true);
+            menu.findItem(R.id.nav_cart).setVisible(true);
             menu.findItem(R.id.nav_profile).setVisible(true);
         }else{
             menu.findItem(R.id.nav_login).setVisible(true);
             menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_cart).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
         }
     }

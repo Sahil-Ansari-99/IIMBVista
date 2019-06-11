@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     Menu menu;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -104,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_cart){
+                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
                     return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_logout){
@@ -175,32 +180,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
-        if(profPref.getBoolean("Logged", false)){
-            menu.findItem(R.id.toolbar_menu_log_out).setVisible(true);
-        }else{
-            menu.findItem(R.id.toolbar_menu_log_out).setVisible(false);
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+//        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+//        if(profPref.getBoolean("Logged", false)){
+//            menu.findItem(R.id.toolbar_menu_log_out).setVisible(true);
+//        }else{
+//            menu.findItem(R.id.toolbar_menu_log_out).setVisible(false);
+//        }
+//        return true;
+//    }
 
     public void updateMenu(Menu menu){
         SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
         if(profPref.getBoolean("Logged", false)){
             menu.findItem(R.id.nav_login).setVisible(false);
             menu.findItem(R.id.nav_logout).setVisible(true);
+            menu.findItem(R.id.nav_cart).setVisible(true);
             menu.findItem(R.id.nav_profile).setVisible(true);
         }else{
             menu.findItem(R.id.nav_login).setVisible(true);
             menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_cart).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
         }
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -212,7 +217,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 return true;
             case R.id.toolbar_menu_cart:
-                //TODO
+                startActivity(new Intent(getApplicationContext(), CartActivity.class));
+                return true;
             case R.id.toolbar_menu_log_out:
                 SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
                 profEditor.putBoolean("Logged", false);

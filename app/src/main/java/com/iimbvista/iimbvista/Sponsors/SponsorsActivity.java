@@ -25,9 +25,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.iimbvista.iimbvista.Adapter.SponsorsAdapter;
+import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
+import com.iimbvista.iimbvista.Model.Cart;
 import com.iimbvista.iimbvista.Model.RootObject;
 import com.iimbvista.iimbvista.Model.Sponsors;
 import com.iimbvista.iimbvista.ProfileActivity;
@@ -106,6 +108,10 @@ public class SponsorsActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     return true;
                 }
+                else if(menuItem.getItemId() == R.id.nav_cart){
+                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
+                    return true;
+                }
                 else if(menuItem.getItemId() == R.id.nav_logout){
                     SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
                     profEditor.putBoolean("Logged", false);
@@ -144,10 +150,12 @@ public class SponsorsActivity extends AppCompatActivity {
         if(profPref.getBoolean("Logged", false)){
             menu.findItem(R.id.nav_login).setVisible(false);
             menu.findItem(R.id.nav_logout).setVisible(true);
+            menu.findItem(R.id.nav_cart).setVisible(true);
             menu.findItem(R.id.nav_profile).setVisible(true);
         }else{
             menu.findItem(R.id.nav_login).setVisible(true);
             menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_cart).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
         }
     }

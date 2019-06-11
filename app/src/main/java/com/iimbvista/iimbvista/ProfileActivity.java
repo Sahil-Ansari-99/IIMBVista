@@ -27,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.Model.ProfileModel;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
@@ -124,6 +125,11 @@ public class ProfileActivity extends AppCompatActivity {
                 }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     drawerLayout.closeDrawers();
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_cart){
+                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
+                    return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_logout){
                     SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
@@ -149,6 +155,11 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.e("Response", response);
                 Gson gson=new Gson();
                 ProfileModel model=gson.fromJson(response, new TypeToken<ProfileModel>(){}.getType());
+
+                SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+                SharedPreferences.Editor editor = profPref.edit();
+                editor.putString("vista_id", model.getVista_id());
+                editor.apply();
 
                 progressDialog.dismiss();
 

@@ -54,6 +54,7 @@ public class EventsMain extends AppCompatActivity {
     private List<EventsModel> itemList;
     Button button_cart;
     FragmentManager fragmentManager;
+    String email, vista_id;
 
     private static final String JSON_URL = "http://www.iimb-vista.com/2019/events.json";
 
@@ -74,8 +75,14 @@ public class EventsMain extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        final String email = getIntent().getStringExtra("email");
-        final String vista_id = getIntent().getStringExtra("vista_id");
+        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+        if(profPref.getBoolean("Logged", false)) {
+            email = profPref.getString("Email", null);
+            vista_id = profPref.getString("vista_id", null);
+        }else{
+            email = null;
+            vista_id = null;
+        }
 
         Bundle bundle = new Bundle();
         bundle.putString("vista_id", vista_id);
@@ -159,6 +166,17 @@ public class EventsMain extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     return true;
                 }
+                else if(menuItem.getItemId() == R.id.nav_cart){
+                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_logout){
+                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+                    profEditor.putBoolean("Logged", false);
+                    profEditor.apply();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    return true;
+                }
                 return false;
             }
         });
@@ -179,10 +197,12 @@ public class EventsMain extends AppCompatActivity {
         if(profPref.getBoolean("Logged", false)){
             menu.findItem(R.id.nav_login).setVisible(false);
             menu.findItem(R.id.nav_logout).setVisible(true);
+            menu.findItem(R.id.nav_cart).setVisible(true);
             menu.findItem(R.id.nav_profile).setVisible(true);
         }else{
             menu.findItem(R.id.nav_login).setVisible(true);
             menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_cart).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
         }
     }
