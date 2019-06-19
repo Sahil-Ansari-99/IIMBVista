@@ -100,18 +100,18 @@ public class SponsorsActivity extends AppCompatActivity {
                         return true;
                     }
                 }
-                else if(menuItem.getItemId() == R.id.nav_events){
-                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_events){
+//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_cart){
-                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_cart){
+//                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_logout){
                     SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
                     profEditor.putBoolean("Logged", false);
@@ -150,12 +150,12 @@ public class SponsorsActivity extends AppCompatActivity {
         if(profPref.getBoolean("Logged", false)){
             menu.findItem(R.id.nav_login).setVisible(false);
             menu.findItem(R.id.nav_logout).setVisible(true);
-            menu.findItem(R.id.nav_cart).setVisible(true);
+//            menu.findItem(R.id.nav_cart).setVisible(true);
             menu.findItem(R.id.nav_profile).setVisible(true);
         }else{
             menu.findItem(R.id.nav_login).setVisible(true);
             menu.findItem(R.id.nav_logout).setVisible(false);
-            menu.findItem(R.id.nav_cart).setVisible(false);
+//            menu.findItem(R.id.nav_cart).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
         }
     }

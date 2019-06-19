@@ -10,21 +10,38 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
+import com.iimbvista.iimbvista.Model.Home;
+import com.iimbvista.iimbvista.Model.HomeRoot;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
+import com.squareup.picasso.Picasso;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -33,10 +50,13 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     LinearLayout timer_layout;
     View timer_view;
+    CarouselView carouselView;
     public static boolean isAppRunning=false;
     private Handler handler;
     private Runnable runnable;
     Menu menu;
+    List<Home> carouselList;
+    private static final String CAROUSEL_URL = "http://www.iimb-vista.com/2019/home.json";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -64,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        carouselView = (CarouselView)findViewById(R.id.home_carousel_top);
+        loadCarouselData();
+
         workshop_number=findViewById(R.id.workshop_number);
         speakers_number=findViewById(R.id.speakers_number);
         sponsors_number=findViewById(R.id.sponsors_number);
@@ -71,7 +94,39 @@ public class MainActivity extends AppCompatActivity {
         animateTextView(0,20,workshop_number);
         animateTextView(0,20,speakers_number);
         animateTextView(0,20,sponsors_number);
-        animateTextView(0,88,countries_number);
+        animateTextView(0,4000,countries_number);
+
+        CardView workshop_card = (CardView)findViewById(R.id.home_workshops_card);
+        workshop_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO
+            }
+        });
+
+        CardView speakers_card = (CardView)findViewById(R.id.home_speakers_card);
+        speakers_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO
+            }
+        });
+
+        CardView sponsors_card = (CardView)findViewById(R.id.home_sponsors_card);
+        sponsors_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SponsorsActivity.class));
+            }
+        });
+
+        CardView reg_card = (CardView)findViewById(R.id.home_registrations_card);
+        reg_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+            }
+        });
 
         NavigationView navigationView=(NavigationView)findViewById(R.id.home_nav_view);
 
@@ -99,18 +154,18 @@ public class MainActivity extends AppCompatActivity {
                 }else if(menuItem.getItemId() == R.id.nav_home){
                     drawerLayout.closeDrawers();
                 }
-                else if(menuItem.getItemId() == R.id.nav_events){
-                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_events){
+//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_cart){
-                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_cart){
+//                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_logout){
                     SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
                     profEditor.putBoolean("Logged", false);
@@ -121,6 +176,38 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+    public void loadCarouselData(){
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, CAROUSEL_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Gson gson=new Gson();
+                HomeRoot homeRoot = gson.fromJson(response, new TypeToken<HomeRoot>(){}.getType());
+                carouselList = homeRoot.getHome();
+                carouselView.setImageListener(new ImageListener() {
+                    @Override
+                    public void setImageForPosition(int position, ImageView imageView) {
+                        String urlToLoad = carouselList.get(position).getUrl();
+//                        imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                        Picasso.with(getApplicationContext()).load(urlToLoad).into(imageView);
+                    }
+                });
+
+                carouselView.setPageCount(carouselList.size());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Some error occured", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        requestQueue.add(stringRequest);
 
     }
 
@@ -197,12 +284,12 @@ public class MainActivity extends AppCompatActivity {
         if(profPref.getBoolean("Logged", false)){
             menu.findItem(R.id.nav_login).setVisible(false);
             menu.findItem(R.id.nav_logout).setVisible(true);
-            menu.findItem(R.id.nav_cart).setVisible(true);
+//            menu.findItem(R.id.nav_cart).setVisible(true);
             menu.findItem(R.id.nav_profile).setVisible(true);
         }else{
             menu.findItem(R.id.nav_login).setVisible(true);
             menu.findItem(R.id.nav_logout).setVisible(false);
-            menu.findItem(R.id.nav_cart).setVisible(false);
+//            menu.findItem(R.id.nav_cart).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
         }
     }

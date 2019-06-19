@@ -123,10 +123,10 @@ public class CartActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_events){
-                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_events){
+//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     drawerLayout.closeDrawers();
                 }

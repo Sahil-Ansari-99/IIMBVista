@@ -144,18 +144,18 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_events){
-                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_events){
+//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_cart){
-                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_cart){
+//                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_logout){
                     SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
                     profEditor.putBoolean("Logged", false);

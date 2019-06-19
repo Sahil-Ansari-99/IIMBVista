@@ -14,10 +14,10 @@
         android:icon="@drawable/ic_nav_sponsors"
         android:title="Sponsors" />
 
-    <item
-        android:id="@+id/nav_events"
-        android:icon="@drawable/ic_nav_events"
-        android:title="Events" />
+    <!--<item-->
+        <!--android:id="@+id/nav_events"-->
+        <!--android:icon="@drawable/ic_nav_events"-->
+        <!--android:title="Events" />-->
 
     <item
         android:id="@+id/nav_login"
@@ -29,10 +29,10 @@
         android:icon="@drawable/ic_nav_login"
         android:title="Profile" />
 
-    <item
-        android:id="@+id/nav_cart"
-        android:icon="@drawable/ic_shopping_cart"
-        android:title="Cart" />
+    <!--<item-->
+        <!--android:id="@+id/nav_cart"-->
+        <!--android:icon="@drawable/ic_shopping_cart"-->
+        <!--android:title="Cart" />-->
 
     <item
         android:id="@+id/nav_logout"
