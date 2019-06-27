@@ -39,7 +39,7 @@
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/home_carousel_top"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="500dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="8dp"
                 app:fillColor="#fff"
@@ -304,14 +304,14 @@
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:layout_marginTop="12dp"
-                                    android:src="@mipmap/workshop_img"/>
+                                    android:src="@drawable/event"/>
 
                                 <TextView
                                     android:id="@+id/workshop_number"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
-                                    android:text="20"
+                                    android:text="30+"
                                     android:textStyle="bold"
                                     android:textAlignment="center"
                                     android:textColor="#D7DBDD"
@@ -322,7 +322,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Workshops"
+                                android:text="Events"
                                 android:textStyle="bold"
                                 android:layout_margin="5dp"
                                 android:textColor="#D7DBDD"
@@ -362,14 +362,14 @@
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:layout_marginTop="12dp"
-                                    android:src="@mipmap/speakers_img"/>
+                                    android:src="@drawable/footfall"/>
 
                                 <TextView
                                     android:id="@+id/speakers_number"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
-                                    android:text="20"
+                                    android:text="35000+"
                                     android:textStyle="bold"
                                     android:textAlignment="center"
                                     android:textColor="#D7DBDD"
@@ -380,7 +380,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Speakers"
+                                android:text="Footfall"
                                 android:textStyle="bold"
                                 android:layout_margin="5dp"
                                 android:textColor="#D7DBDD"
@@ -428,14 +428,14 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_marginTop="12dp"
-                                android:src="@mipmap/sponsors_img"/>
+                                android:src="@drawable/college"/>
 
                             <TextView
                                 android:id="@+id/sponsors_number"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
-                                android:text="20"
+                                android:text="1800+"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textColor="#D7DBDD"
@@ -446,7 +446,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sponsors"
+                            android:text="Colleges"
                             android:textStyle="bold"
                             android:layout_margin="5dp"
                             android:textColor="#D7DBDD"
@@ -486,14 +486,14 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_marginTop="12dp"
-                                android:src="@mipmap/countries_img"/>
+                                android:src="@drawable/prize"/>
 
                             <TextView
                                 android:id="@+id/countries_number"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
-                                android:text="4000"
+                                android:text="45L+"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textColor="#D7DBDD"
@@ -504,7 +504,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Registrations"
+                            android:text="Prizes"
                             android:textStyle="bold"
                             android:layout_margin="5dp"
                             android:textColor="#D7DBDD"

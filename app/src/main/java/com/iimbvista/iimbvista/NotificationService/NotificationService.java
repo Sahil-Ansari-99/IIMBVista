@@ -23,10 +23,15 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.R;
 
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 public class NotificationService extends FirebaseMessagingService {
     NotificationManager notificationManager;
+    String notifKey, notifKeyValue;
 
     @Override
     public void onNewToken(String s) {
@@ -52,22 +57,73 @@ public class NotificationService extends FirebaseMessagingService {
             notificationIntent = new Intent(this, MainActivity.class);
         }
 
-        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        for (Map.Entry<String, String> entry : remoteMessage.getData().entrySet()) {
+            notifKey = entry.getKey();
+            notifKeyValue = entry.getValue();
+            Log.d("Test", "key, " + notifKey + " value " + notifKeyValue);
+        }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "default")
-                .setSmallIcon(R.mipmap.app_logo_dark)
-                .setContentTitle(remoteMessage.getNotification().getTitle())
-                .setContentText(remoteMessage.getNotification().getBody())
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getNotification().getBody()))
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
 
-        notificationManager.notify(notificationId, notificationBuilder.build());
+        if (notifKey.toLowerCase().equals("text")) {
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "default")
+                    .setSmallIcon(R.mipmap.app_logo_dark)
+                    .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.app_logo_dark))
+                    .setContentTitle(remoteMessage.getNotification().getTitle())
+                    .setContentText(remoteMessage.getNotification().getBody())
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getNotification().getBody()))
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent);
+
+            notificationManager.notify(notificationId, notificationBuilder.build());
+
+        }else if (notifKey.toLowerCase().equals("picture")){
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+
+            Bitmap bitmap;
+            try{
+                URL url = new URL(notifKeyValue);
+                bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            }catch (Exception e){
+                e.printStackTrace();
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.app_logo_dark);
+            }
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "default")
+                    .setSmallIcon(R.mipmap.app_logo_dark)
+                    .setLargeIcon(bitmap)
+                    .setContentTitle(remoteMessage.getNotification().getTitle())
+                    .setContentText(remoteMessage.getNotification().getBody())
+                    .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap).bigLargeIcon(null))
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent);
+
+            notificationManager.notify(notificationId, notificationBuilder.build());
+
+        }else if (notifKey.toLowerCase().equals("form")){
+            if (!notifKeyValue.startsWith("http://") && !notifKeyValue.startsWith("https://")){
+                notifKeyValue = "http://" + notifKeyValue;
+            }
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(notifKeyValue));
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, browserIntent, PendingIntent.FLAG_ONE_SHOT);
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "default")
+                    .setSmallIcon(R.mipmap.app_logo_dark)
+                    .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.app_logo_dark))
+                    .setContentTitle(remoteMessage.getNotification().getTitle())
+                    .setContentText(remoteMessage.getNotification().getBody())
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getNotification().getBody()))
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent);
+
+            notificationManager.notify(notificationId, notificationBuilder.build());
+        }
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
             @Override

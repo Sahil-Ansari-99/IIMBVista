@@ -64,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         vcap=(TextView)findViewById(R.id.profile_vcap);
         vista_id=(TextView)findViewById(R.id.event_title);
         emailText=(TextView)findViewById(R.id.profile_email);
-        btn_events = findViewById(R.id.btn_events);
+//        btn_events = findViewById(R.id.btn_events);
 
         progressDialog=new ProgressDialog(this);
         progressDialog.show();
@@ -82,15 +82,15 @@ public class ProfileActivity extends AppCompatActivity {
 
 //        getProfileDetails(profEmail);
 
-        btn_events.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EventsMain.class);
-                intent.putExtra("email", profEmail);
-                intent.putExtra("vista_id", vista_id.getText().toString().split(": ")[1]);
-                startActivity(intent);
-            }
-        });
+//        btn_events.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), EventsMain.class);
+//                intent.putExtra("email", profEmail);
+//                intent.putExtra("vista_id", vista_id.getText().toString().split(": ")[1]);
+//                startActivity(intent);
+//            }
+//        });
 
         NavigationView navigationView=(NavigationView)findViewById(R.id.profile_nav_view);
 

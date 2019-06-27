@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private Runnable runnable;
     Menu menu;
     List<Home> carouselList;
-    private static final String CAROUSEL_URL = "http://www.iimb-vista.com/2019/home.json";
+    private static final String CAROUSEL_URL = "http://www.iimb-vista.com/2019/Home.json";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -91,42 +92,42 @@ public class MainActivity extends AppCompatActivity {
         speakers_number=findViewById(R.id.speakers_number);
         sponsors_number=findViewById(R.id.sponsors_number);
         countries_number=findViewById(R.id.countries_number);
-        animateTextView(0,20,workshop_number);
-        animateTextView(0,20,speakers_number);
-        animateTextView(0,20,sponsors_number);
-        animateTextView(0,4000,countries_number);
+//        animateTextView(0,20,workshop_number);
+//        animateTextView(0,20,speakers_number);
+//        animateTextView(0,20,sponsors_number);
+//        animateTextView(0,4000,countries_number);
 
-        CardView workshop_card = (CardView)findViewById(R.id.home_workshops_card);
-        workshop_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO
-            }
-        });
-
-        CardView speakers_card = (CardView)findViewById(R.id.home_speakers_card);
-        speakers_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO
-            }
-        });
-
-        CardView sponsors_card = (CardView)findViewById(R.id.home_sponsors_card);
-        sponsors_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SponsorsActivity.class));
-            }
-        });
-
-        CardView reg_card = (CardView)findViewById(R.id.home_registrations_card);
-        reg_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-            }
-        });
+//        CardView workshop_card = (CardView)findViewById(R.id.home_workshops_card);
+//        workshop_card.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //TODO
+//            }
+//        });
+//
+//        CardView speakers_card = (CardView)findViewById(R.id.home_speakers_card);
+//        speakers_card.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //TODO
+//            }
+//        });
+//
+//        CardView sponsors_card = (CardView)findViewById(R.id.home_sponsors_card);
+//        sponsors_card.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(), SponsorsActivity.class));
+//            }
+//        });
+//
+//        CardView reg_card = (CardView)findViewById(R.id.home_registrations_card);
+//        reg_card.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+//            }
+//        });
 
         NavigationView navigationView=(NavigationView)findViewById(R.id.home_nav_view);
 
@@ -188,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 Gson gson=new Gson();
                 HomeRoot homeRoot = gson.fromJson(response, new TypeToken<HomeRoot>(){}.getType());
                 carouselList = homeRoot.getHome();
+                Log.e("Test", response);
                 carouselView.setImageListener(new ImageListener() {
                     @Override
                     public void setImageForPosition(int position, ImageView imageView) {
@@ -207,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        stringRequest.setShouldCache(false);
         requestQueue.add(stringRequest);
 
     }

@@ -4,6 +4,8 @@
     package="com.iimbvista.iimbvista">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -53,6 +55,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+
+            android:resource="@mipmap/app_logo_dark" />
 
         <!--<service android:name=".NotificationService.InstanceIdService"-->
             <!--android:permission="com.google.android.c2dm.permission.SEND">-->
