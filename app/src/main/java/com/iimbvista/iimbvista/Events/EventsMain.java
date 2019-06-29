@@ -28,8 +28,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.iimbvista.iimbvista.AccommodationActivity;
 import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
+import com.iimbvista.iimbvista.MerchActivity;
 import com.iimbvista.iimbvista.Model.EventsModel;
 import com.iimbvista.iimbvista.ProfileActivity;
 import com.iimbvista.iimbvista.R;
@@ -175,6 +177,14 @@ public class EventsMain extends AppCompatActivity {
                     profEditor.putBoolean("Logged", false);
                     profEditor.apply();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_accommodation){
+                    startActivity(new Intent(getApplicationContext(), AccommodationActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_merch){
+                    startActivity(new Intent(getApplicationContext(), MerchActivity.class));
                     return true;
                 }
                 return false;

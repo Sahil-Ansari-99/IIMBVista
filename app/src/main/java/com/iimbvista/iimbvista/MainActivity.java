@@ -174,6 +174,14 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
+                else if(menuItem.getItemId() == R.id.nav_accommodation){
+                    startActivity(new Intent(getApplicationContext(), AccommodationActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_merch){
+                    startActivity(new Intent(getApplicationContext(), MerchActivity.class));
+                    return true;
+                }
                 return false;
             }
         });

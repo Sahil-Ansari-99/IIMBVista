@@ -29,6 +29,16 @@
         android:icon="@drawable/ic_nav_login"
         android:title="Profile" />
 
+    <item
+        android:id="@+id/nav_accommodation"
+        android:icon="@drawable/ic_nav_accommodation"
+        android:title="Accommodation" />
+
+    <item
+        android:id="@+id/nav_merch"
+        android:icon="@drawable/ic_nav_merch"
+        android:title="Merchandise" />
+
     <!--<item-->
         <!--android:id="@+id/nav_cart"-->
         <!--android:icon="@drawable/ic_shopping_cart"-->

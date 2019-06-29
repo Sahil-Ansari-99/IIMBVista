@@ -1,4 +1,4 @@
-package com.iimbvista.iimbvista.Sponsors;
+package com.iimbvista.iimbvista;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,76 +9,79 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.iimbvista.iimbvista.AccommodationActivity;
-import com.iimbvista.iimbvista.Adapter.SponsorsAdapter;
+import com.iimbvista.iimbvista.Adapter.AccomAdapter;
 import com.iimbvista.iimbvista.Events.CartActivity;
-import com.iimbvista.iimbvista.Events.EventsMain;
-import com.iimbvista.iimbvista.LoginActivity;
-import com.iimbvista.iimbvista.MainActivity;
-import com.iimbvista.iimbvista.MerchActivity;
-import com.iimbvista.iimbvista.Model.Cart;
-import com.iimbvista.iimbvista.Model.RootObject;
-import com.iimbvista.iimbvista.Model.Sponsors;
-import com.iimbvista.iimbvista.ProfileActivity;
-import com.iimbvista.iimbvista.R;
+import com.iimbvista.iimbvista.Model.AccommRoot;
+import com.iimbvista.iimbvista.Model.AccommRule;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
+import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-
-public class SponsorsActivity extends AppCompatActivity {
+public class AccommodationActivity extends AppCompatActivity {
     Toolbar toolbar;
-    RecyclerView  recyclerView;
-    SponsorsAdapter adapter;
+    AccommRoot accommRoot;
+    List<AccommRule> itemList;
+    RecyclerView recyclerView;
+    AccomAdapter adapter;
     DrawerLayout drawerLayout;
-    TextView name;
-    OkHttpClient client;
-    Request request;
-    List<Sponsors> itemList;
-
-    public static String SPONS_LINK="http://www.iimb-vista.com/2019/sponsors.json";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sponsors);
+        setContentView(R.layout.activity_accommodation_drawer);
 
-        drawerLayout=(DrawerLayout)findViewById(R.id.sponsors_drawer_layout);
+        drawerLayout=(DrawerLayout)findViewById(R.id.accom_drawer_layout);
 
-        toolbar=(Toolbar)findViewById(R.id.sponsors_toolbar);
+        toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.accom_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_toggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recyclerView=(RecyclerView)findViewById(R.id.sponsors_recyclerView);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(SponsorsActivity.this,2);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView=(RecyclerView)findViewById(R.id.accom_recyclerView);
 
-        itemList=new ArrayList<>();
-        getData();
+        try {
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_toggle);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
-        NavigationView navigationView=(NavigationView)findViewById(R.id.sponsors_nav_view);
+        String dataString = loadData();
+        Log.e("Test", dataString);
+        Gson gson = new Gson();
+        accommRoot = gson.fromJson(dataString, new TypeToken<AccommRoot>() {}.getType());
+        itemList = accommRoot.getRules();
+
+        adapter = new AccomAdapter(getApplicationContext(), itemList);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        Button storeButton = (Button)findViewById(R.id.accom_button_buy);
+        storeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), WebViewActivity.class));
+            }
+        });
+
+        NavigationView navigationView=(NavigationView)findViewById(R.id.accom_nav_view);
 
         updateMenu(navigationView.getMenu());
 
@@ -86,13 +89,13 @@ public class SponsorsActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if(menuItem.getItemId() == R.id.nav_sponsors){
-                    drawerLayout.closeDrawers();
+                    startActivity(new Intent(getApplicationContext(), SponsorsActivity.class));
+                    return true;
                 }else if(menuItem.getItemId() == R.id.nav_register){
                     startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
                     return true;
-                }else if(menuItem.getItemId() == R.id.nav_home){
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                }else if(menuItem.getItemId() == R.id.nav_login) {
+                }
+                else if(menuItem.getItemId() == R.id.nav_login) {
                     SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
                     if(profPref.getBoolean("Logged", false)){
                         Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
@@ -101,6 +104,9 @@ public class SponsorsActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                         return true;
                     }
+                }else if(menuItem.getItemId() == R.id.nav_home){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    return true;
                 }
 //                else if(menuItem.getItemId() == R.id.nav_events){
 //                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
@@ -122,7 +128,7 @@ public class SponsorsActivity extends AppCompatActivity {
                     return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_accommodation){
-                    startActivity(new Intent(getApplicationContext(), AccommodationActivity.class));
+                    drawerLayout.closeDrawers();
                     return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_merch){
@@ -132,27 +138,6 @@ public class SponsorsActivity extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    private void getData() {
-        RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
-
-        StringRequest stringRequest=new StringRequest(com.android.volley.Request.Method.GET, SPONS_LINK, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-                Gson gson=new Gson();
-                RootObject rootObject=gson.fromJson(s, new TypeToken<RootObject>(){}.getType());
-                itemList=rootObject.getSponsors();
-                adapter=new SponsorsAdapter(getApplicationContext(), itemList);
-                recyclerView.setAdapter(adapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        });
-        requestQueue.add(stringRequest);
     }
 
     public void updateMenu(Menu menu){
@@ -170,12 +155,38 @@ public class SponsorsActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    public String loadData(){
+        BufferedReader bufferedReader = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        try{
+            bufferedReader = new BufferedReader(new InputStreamReader(getAssets().open("Accomodation.json")));
+            String line = "";
+            while((line = bufferedReader.readLine())!= null){
+                stringBuilder.append(line);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return stringBuilder.toString();
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.toolbar_menu_profile:
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                return true;
+            case R.id.toolbar_menu_cart:
+                startActivity(new Intent(getApplicationContext(), CartActivity.class));
+                return true;
+            case R.id.toolbar_menu_log_out:
+                SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+                profEditor.putBoolean("Logged", false);
+                profEditor.apply();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

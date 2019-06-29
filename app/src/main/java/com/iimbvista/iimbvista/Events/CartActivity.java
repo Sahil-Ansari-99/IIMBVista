@@ -31,6 +31,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.iimbvista.iimbvista.AccommodationActivity;
 import com.iimbvista.iimbvista.Adapter.CartAdapter;
 import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
@@ -135,6 +136,10 @@ public class CartActivity extends AppCompatActivity {
                     profEditor.putBoolean("Logged", false);
                     profEditor.apply();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_accommodation){
+                    startActivity(new Intent(getApplicationContext(), AccommodationActivity.class));
                     return true;
                 }
                 return false;

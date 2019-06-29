@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/accom_toolbar"
+        app:title="Accommodation"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="#fff"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:padding="3dp"
+                app:cardBackgroundColor="@color/colorHomeCard"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Instructions about Accommodation"
+                        android:maxLines="1"
+                        android:textSize="20dp"
+                        android:layout_margin="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/colorContent"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/colorHomeText"
+                        android:layout_margin="8dp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:id="@+id/accom_recyclerView"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:padding="3dp"
+                app:cardBackgroundColor="@color/colorHomeCard"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:text="Pricing"
+                        android:layout_margin="5dp"
+                        android:textColor="@color/colorContent"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/colorHomeText"
+                        android:layout_margin="8dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Accommodation(per night) - Rs.399"
+                        android:textColor="@color/colorContent"
+                        android:layout_margin="5dp"
+                        android:textSize="17dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Accommodation Combo(3 days + 1 round neck t-shirt) - Rs.1399(~30% Discount)"
+                        android:textColor="@color/colorContent"
+                        android:layout_margin="5dp"
+                        android:textSize="17dp"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/colorLightRed"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/accom_button_buy"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
