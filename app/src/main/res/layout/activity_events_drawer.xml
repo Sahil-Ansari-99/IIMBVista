@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/activity_events_main" />
+        <include layout="@layout/activity_events_main_new" />
 
     </android.support.design.widget.CoordinatorLayout>
 

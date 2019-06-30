@@ -170,7 +170,6 @@ public class CartActivity extends AppCompatActivity {
                         cartList.add(entry);
                         cartAdapter = new CartAdapter(cartList, vista_id, cart_total);
                         recyclerView.setAdapter(cartAdapter);
-
                     }
 
                 }catch (Exception e){

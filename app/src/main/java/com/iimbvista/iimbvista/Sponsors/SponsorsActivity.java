@@ -72,7 +72,7 @@ public class SponsorsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView=(RecyclerView)findViewById(R.id.sponsors_recyclerView);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(SponsorsActivity.this,2);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         itemList=new ArrayList<>();
