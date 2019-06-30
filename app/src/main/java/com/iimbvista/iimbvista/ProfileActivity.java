@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
+import com.iimbvista.iimbvista.Events.EventsMainNew;
 import com.iimbvista.iimbvista.Model.ProfileModel;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
@@ -119,10 +120,10 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
-//                else if(menuItem.getItemId() == R.id.nav_events){
-//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-//                    return true;
-//                }
+                else if(menuItem.getItemId() == R.id.nav_events){
+                    startActivity(new Intent(getApplicationContext(), EventsMainNew.class));
+                    return true;
+                }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     drawerLayout.closeDrawers();
                     return true;

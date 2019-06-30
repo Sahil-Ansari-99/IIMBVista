@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.iimbvista.iimbvista.Events.EventsMain;
+import com.iimbvista.iimbvista.Events.EventsMainNew;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
@@ -98,10 +99,10 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
-//                else if(menuItem.getItemId() == R.id.nav_events){
-//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-//                    return true;
-//                }
+                else if(menuItem.getItemId() == R.id.nav_events){
+                    startActivity(new Intent(getApplicationContext(), EventsMainNew.class));
+                    return true;
+                }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     return true;

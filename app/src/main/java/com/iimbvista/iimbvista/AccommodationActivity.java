@@ -25,6 +25,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.iimbvista.iimbvista.Adapter.AccomAdapter;
 import com.iimbvista.iimbvista.Events.CartActivity;
+import com.iimbvista.iimbvista.Events.EventsMain;
+import com.iimbvista.iimbvista.Events.EventsMainNew;
 import com.iimbvista.iimbvista.Model.AccommRoot;
 import com.iimbvista.iimbvista.Model.AccommRule;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
@@ -108,10 +110,10 @@ public class AccommodationActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
-//                else if(menuItem.getItemId() == R.id.nav_events){
-//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-//                    return true;
-//                }
+                else if(menuItem.getItemId() == R.id.nav_events){
+                    startActivity(new Intent(getApplicationContext(), EventsMainNew.class));
+                    return true;
+                }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     return true;

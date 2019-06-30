@@ -32,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import com.iimbvista.iimbvista.AccommodationActivity;
 import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
+import com.iimbvista.iimbvista.Events.EventsMainNew;
 import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.MerchActivity;
@@ -146,10 +147,10 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
-//                else if(menuItem.getItemId() == R.id.nav_events){
-//                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
-//                    return true;
-//                }
+                else if(menuItem.getItemId() == R.id.nav_events){
+                    startActivity(new Intent(getApplicationContext(), EventsMainNew.class));
+                    return true;
+                }
                 else if(menuItem.getItemId() == R.id.nav_profile){
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     return true;

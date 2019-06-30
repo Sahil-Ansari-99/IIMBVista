@@ -136,7 +136,8 @@
                 android:text="Buy"
                 android:layout_margin="5dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/colorLightRed"
+                android:background="@color/colorAccent"
+                android:textColor="#fff"
                 android:clickable="true"
                 android:focusable="true"
                 android:id="@+id/merch_button_buy"/>
