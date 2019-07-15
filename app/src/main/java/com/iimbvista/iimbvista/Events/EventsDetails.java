@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iimbvista.iimbvista.R;
+import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 import com.squareup.picasso.Picasso;
 
 public class EventsDetails extends AppCompatActivity {
@@ -23,6 +24,16 @@ public class EventsDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_details);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.event_details_toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         String title = getIntent().getStringExtra("Title");
         String dates = getIntent().getStringExtra("Dates");

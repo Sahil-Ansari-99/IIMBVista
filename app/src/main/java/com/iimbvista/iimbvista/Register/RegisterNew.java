@@ -1,61 +1,75 @@
-package com.iimbvista.iimbvista;
+package com.iimbvista.iimbvista.Register;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.support.v7.widget.Toolbar;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.iimbvista.iimbvista.AccommodationActivity;
 import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMainNew;
+import com.iimbvista.iimbvista.LoginActivity;
+import com.iimbvista.iimbvista.MainActivity;
+import com.iimbvista.iimbvista.MerchActivity;
+import com.iimbvista.iimbvista.ProfileActivity;
 import com.iimbvista.iimbvista.Quiz.QuizActivity;
-import com.iimbvista.iimbvista.Register.RegisterActivity;
-import com.iimbvista.iimbvista.Register.RegisterNew;
+import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
+import com.iimbvista.iimbvista.StoreClient;
 
-public class WebViewActivity extends AppCompatActivity {
+public class RegisterNew extends AppCompatActivity {
     DrawerLayout drawerLayout;
     WebView webView;
     Toolbar toolbar;
-    public static String STORE_URL = "https://www.townscript.com/widget/iimb-vista19";
+    ProgressBar progressBar;
+    private String REG_URL = "https://www.iimb-vista.com/summit-pass/";
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview);
+        setContentView(R.layout.activity_register_new);
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.store_drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.registration_drawer_layout);
 
-        toolbar = (Toolbar)findViewById(R.id.store_toolbar);
+        progressBar = (ProgressBar)findViewById(R.id.register_new_progress);
+        progressBar.setVisibility(View.VISIBLE);
+
+        toolbar = (Toolbar) findViewById(R.id.registration_toolbar);
         setSupportActionBar(toolbar);
 
         try {
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_toggle);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 
-        webView = (WebView)findViewById(R.id.store_webview);
+        webView = (WebView) findViewById(R.id.registration_webview);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        progressBar.setVisibility(View.GONE);
 
         StoreClient storeClient = new StoreClient(this);
 
-        webView.loadUrl(STORE_URL);
+        webView.loadUrl(REG_URL);
 
-        NavigationView navigationView=(NavigationView)findViewById(R.id.register_nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.registration_nav_view);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -64,7 +78,7 @@ public class WebViewActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), SponsorsActivity.class));
                     return true;
                 }else if(menuItem.getItemId() == R.id.nav_register){
-                    startActivity(new Intent(getApplicationContext(), RegisterNew.class));
+                    drawerLayout.closeDrawers();
                     return true;
                 }
 //                else if(menuItem.getItemId() == R.id.nav_login) {
@@ -114,6 +128,7 @@ public class WebViewActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

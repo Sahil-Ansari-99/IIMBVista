@@ -111,16 +111,16 @@ public class CartActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_login) {
-                    SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
-                    if(profPref.getBoolean("Logged", false)){
-                        Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
-                        return true;
-                    }else{
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                        return true;
-                    }
-                }else if(menuItem.getItemId() == R.id.nav_home){
+//                else if(menuItem.getItemId() == R.id.nav_login) {
+//                    SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+//                    if(profPref.getBoolean("Logged", false)){
+//                        Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
+//                        return true;
+//                    }else{
+//                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//                        return true;
+//                    }
+                else if(menuItem.getItemId() == R.id.nav_home){
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
@@ -128,16 +128,16 @@ public class CartActivity extends AppCompatActivity {
 //                    startActivity(new Intent(getApplicationContext(), EventsMain.class));
 //                    return true;
 //                }
-                else if(menuItem.getItemId() == R.id.nav_profile){
-                    drawerLayout.closeDrawers();
-                }
-                else if(menuItem.getItemId() == R.id.nav_logout){
-                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
-                    profEditor.putBoolean("Logged", false);
-                    profEditor.apply();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_profile){
+//                    drawerLayout.closeDrawers();
+//                }
+//                else if(menuItem.getItemId() == R.id.nav_logout){
+//                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+//                    profEditor.putBoolean("Logged", false);
+//                    profEditor.apply();
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_accommodation){
                     startActivity(new Intent(getApplicationContext(), AccommodationActivity.class));
                     return true;

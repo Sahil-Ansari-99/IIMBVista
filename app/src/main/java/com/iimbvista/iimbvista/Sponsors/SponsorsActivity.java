@@ -36,8 +36,10 @@ import com.iimbvista.iimbvista.Model.Cart;
 import com.iimbvista.iimbvista.Model.RootObject;
 import com.iimbvista.iimbvista.Model.Sponsors;
 import com.iimbvista.iimbvista.ProfileActivity;
+import com.iimbvista.iimbvista.Quiz.QuizActivity;
 import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
+import com.iimbvista.iimbvista.Register.RegisterNew;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,53 +83,56 @@ public class SponsorsActivity extends AppCompatActivity {
 
         NavigationView navigationView=(NavigationView)findViewById(R.id.sponsors_nav_view);
 
-        updateMenu(navigationView.getMenu());
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if(menuItem.getItemId() == R.id.nav_sponsors){
                     drawerLayout.closeDrawers();
                 }else if(menuItem.getItemId() == R.id.nav_register){
-                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                    startActivity(new Intent(getApplicationContext(), RegisterNew.class));
                     return true;
-                }else if(menuItem.getItemId() == R.id.nav_home){
+                }else if(menuItem.getItemId() == R.id.nav_home) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                }else if(menuItem.getItemId() == R.id.nav_login) {
-                    SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
-                    if(profPref.getBoolean("Logged", false)){
-                        Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
-                        return true;
-                    }else{
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                        return true;
-                    }
                 }
+//                }else if(menuItem.getItemId() == R.id.nav_login) {
+//                    SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+//                    if(profPref.getBoolean("Logged", false)){
+//                        Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
+//                        return true;
+//                    }else{
+//                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//                        return true;
+//                    }
+//                }
                 else if(menuItem.getItemId() == R.id.nav_events){
                     startActivity(new Intent(getApplicationContext(), EventsMainNew.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_profile){
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_profile){
+//                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+//                    return true;
+//                }
 //                else if(menuItem.getItemId() == R.id.nav_cart){
 //                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
 //                    return true;
 //                }
-                else if(menuItem.getItemId() == R.id.nav_logout){
-                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
-                    profEditor.putBoolean("Logged", false);
-                    profEditor.apply();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_logout){
+//                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+//                    profEditor.putBoolean("Logged", false);
+//                    profEditor.apply();
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_accommodation){
                     startActivity(new Intent(getApplicationContext(), AccommodationActivity.class));
                     return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_merch){
                     startActivity(new Intent(getApplicationContext(), MerchActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_quiz) {
+                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
                     return true;
                 }
                 return false;
@@ -153,22 +158,8 @@ public class SponsorsActivity extends AppCompatActivity {
 
             }
         });
+        stringRequest.setShouldCache(false);
         requestQueue.add(stringRequest);
-    }
-
-    public void updateMenu(Menu menu){
-        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
-        if(profPref.getBoolean("Logged", false)){
-            menu.findItem(R.id.nav_login).setVisible(false);
-            menu.findItem(R.id.nav_logout).setVisible(true);
-//            menu.findItem(R.id.nav_cart).setVisible(true);
-            menu.findItem(R.id.nav_profile).setVisible(true);
-        }else{
-            menu.findItem(R.id.nav_login).setVisible(true);
-            menu.findItem(R.id.nav_logout).setVisible(false);
-//            menu.findItem(R.id.nav_cart).setVisible(false);
-            menu.findItem(R.id.nav_profile).setVisible(false);
-        }
     }
 
     @Override

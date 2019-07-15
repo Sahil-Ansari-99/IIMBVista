@@ -33,6 +33,7 @@ import com.iimbvista.iimbvista.Model.EventsModelNew;
 import com.iimbvista.iimbvista.ProfileActivity;
 import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
+import com.iimbvista.iimbvista.Register.RegisterNew;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
 import org.json.JSONArray;
@@ -82,8 +83,6 @@ public class EventsMainNew extends AppCompatActivity {
 
         NavigationView navigationView=(NavigationView)findViewById(R.id.events_nav_view);
 
-        updateMenu(navigationView.getMenu());
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -91,13 +90,13 @@ public class EventsMainNew extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), SponsorsActivity.class));
                     return true;
                 }else if(menuItem.getItemId() == R.id.nav_register){
-                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                    startActivity(new Intent(getApplicationContext(), RegisterNew.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_login) {
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_login) {
+//                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//                    return true;
+//                }
 //                else if(menuItem.getItemId() == R.id.nav_events){
 //                    drawerLayout.closeDrawers();
 //                }
@@ -105,21 +104,21 @@ public class EventsMainNew extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_profile){
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_profile){
+//                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+//                    return true;
+//                }
 //                else if(menuItem.getItemId() == R.id.nav_cart){
 //                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
 //                    return true;
 //                }
-                else if(menuItem.getItemId() == R.id.nav_logout){
-                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
-                    profEditor.putBoolean("Logged", false);
-                    profEditor.apply();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_logout){
+//                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+//                    profEditor.putBoolean("Logged", false);
+//                    profEditor.apply();
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_accommodation){
                     startActivity(new Intent(getApplicationContext(), AccommodationActivity.class));
                     return true;
@@ -149,22 +148,6 @@ public class EventsMainNew extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public void updateMenu(Menu menu){
-        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
-        if(profPref.getBoolean("Logged", false)){
-            menu.findItem(R.id.nav_login).setVisible(false);
-            menu.findItem(R.id.nav_logout).setVisible(true);
-//            menu.findItem(R.id.nav_cart).setVisible(true);
-            menu.findItem(R.id.nav_profile).setVisible(true);
-        }else{
-            menu.findItem(R.id.nav_login).setVisible(true);
-            menu.findItem(R.id.nav_logout).setVisible(false);
-//            menu.findItem(R.id.nav_cart).setVisible(false);
-            menu.findItem(R.id.nav_profile).setVisible(false);
-        }
     }
 
     public void getData(){

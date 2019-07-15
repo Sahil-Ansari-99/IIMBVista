@@ -34,10 +34,13 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".Sponsors.SponsorsActivity" />
-        <activity android:name=".Register.RegisterActivity" />
+        <activity android:name=".Sponsors.SponsorDetailActivity" />
+        <activity android:name=".Register.RegisterNew" />
         <activity android:name=".Register.RegisterationResult" />
         <activity android:name=".Events.EventsMain" />
         <activity android:name=".AccommodationActivity" />
+        <activity android:name=".Quiz.QuizActivity" />
+        <activity android:name=".Quiz.QuizCongo"/>
         <activity android:name=".MerchActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".ConfirmEmail">

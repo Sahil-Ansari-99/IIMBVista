@@ -37,6 +37,7 @@ import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.MerchActivity;
 import com.iimbvista.iimbvista.ProfileActivity;
+import com.iimbvista.iimbvista.Quiz.QuizActivity;
 import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
@@ -123,8 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         NavigationView navigationView=(NavigationView)findViewById(R.id.register_nav_view);
 
-        updateMenu(navigationView.getMenu());
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -134,16 +133,16 @@ public class RegisterActivity extends AppCompatActivity {
                 }else if(menuItem.getItemId() == R.id.nav_register){
                     drawerLayout.closeDrawers();
                 }
-                else if(menuItem.getItemId() == R.id.nav_login) {
-                    SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
-                    if(profPref.getBoolean("Logged", false)){
-                        Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
-                        return true;
-                    }else{
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                        return true;
-                    }
-                }else if(menuItem.getItemId() == R.id.nav_home){
+//                else if(menuItem.getItemId() == R.id.nav_login) {
+//                    SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
+//                    if(profPref.getBoolean("Logged", false)){
+//                        Toast.makeText(getApplicationContext(), "Already Logged In", Toast.LENGTH_LONG).show();
+//                        return true;
+//                    }else{
+//                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//                        return true;
+//                    }
+                else if(menuItem.getItemId() == R.id.nav_home){
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 }
@@ -151,27 +150,31 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), EventsMainNew.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_profile){
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_profile){
+//                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+//                    return true;
+//                }
 //                else if(menuItem.getItemId() == R.id.nav_cart){
 //                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
 //                    return true;
 //                }
-                else if(menuItem.getItemId() == R.id.nav_logout){
-                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
-                    profEditor.putBoolean("Logged", false);
-                    profEditor.apply();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_logout){
+//                    SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
+//                    profEditor.putBoolean("Logged", false);
+//                    profEditor.apply();
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    return true;
+//                }
                 else if(menuItem.getItemId() == R.id.nav_accommodation){
                     startActivity(new Intent(getApplicationContext(), AccommodationActivity.class));
                     return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_merch){
                     startActivity(new Intent(getApplicationContext(), MerchActivity.class));
+                    return true;
+                }
+                else if(menuItem.getItemId() == R.id.nav_quiz) {
+                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
                     return true;
                 }
                 return false;
@@ -204,19 +207,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
         return nonceId;
-    }
-
-    public void updateMenu(Menu menu){
-        SharedPreferences profPref = getSharedPreferences("Profile", MODE_PRIVATE);
-        if(profPref.getBoolean("Logged", false)){
-            menu.findItem(R.id.nav_login).setVisible(false);
-            menu.findItem(R.id.nav_logout).setVisible(true);
-            menu.findItem(R.id.nav_profile).setVisible(true);
-        }else{
-            menu.findItem(R.id.nav_login).setVisible(true);
-            menu.findItem(R.id.nav_logout).setVisible(false);
-            menu.findItem(R.id.nav_profile).setVisible(false);
-        }
     }
 
     public void registerUser(String name, String password, String email, String nonce){

@@ -1,0 +1,33 @@
+{
+	"Quiz":[
+		{
+			"question": "What is IIMB Vista?",
+			"answers":[
+				"Option1", "Option2", "Option3", "Option4"],
+			"solution": "Option1"
+		},
+		{
+			"question": "Number of events in IIMB Vista?",
+			"answers":[
+				"10", "15", "20", "5"],
+			"solution": "20"
+		},
+		{
+			"question": "When does it start?",
+			"answers":[
+				"Option1", "Option2", "Option3", "Option4"],
+			"solution": "Option3"
+		},
+		{
+			"question": "Some question?",
+			"answers":[
+				"Option1", "Option2", "Option3", "Option4"],
+			"solution": "Option2"
+		},
+		{
+			"question": "Last question?",
+			"answers":[
+				"Option1", "Option2", "Option3", "Option4"],
+			"solution": "Option4"
+		}]
+}

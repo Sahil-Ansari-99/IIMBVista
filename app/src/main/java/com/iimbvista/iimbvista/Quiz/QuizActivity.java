@@ -1,4 +1,4 @@
-package com.iimbvista.iimbvista;
+package com.iimbvista.iimbvista.Quiz;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -6,37 +6,56 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.support.v7.widget.Toolbar;
+import android.widget.RadioGroup;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
-import com.iimbvista.iimbvista.Events.CartActivity;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.iimbvista.iimbvista.AccommodationActivity;
 import com.iimbvista.iimbvista.Events.EventsMainNew;
-import com.iimbvista.iimbvista.Quiz.QuizActivity;
+import com.iimbvista.iimbvista.LoginActivity;
+import com.iimbvista.iimbvista.MainActivity;
+import com.iimbvista.iimbvista.MerchActivity;
+import com.iimbvista.iimbvista.Model.Quiz;
+import com.iimbvista.iimbvista.Model.QuizRoot;
+import com.iimbvista.iimbvista.Model.RootObject;
+import com.iimbvista.iimbvista.ProfileActivity;
+import com.iimbvista.iimbvista.R;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Register.RegisterNew;
 import com.iimbvista.iimbvista.Sponsors.SponsorsActivity;
 
-public class WebViewActivity extends AppCompatActivity {
-    DrawerLayout drawerLayout;
-    WebView webView;
-    Toolbar toolbar;
-    public static String STORE_URL = "https://www.townscript.com/widget/iimb-vista19";
+import java.util.ArrayList;
+import java.util.List;
+
+public class QuizActivity extends AppCompatActivity {
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private RadioGroup radioGroup;
+    private FragmentManager fragmentManager;
+    private List<Quiz> itemList;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview);
+        setContentView(R.layout.activity_quiz_drawer);
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.store_drawer_layout);
+        drawerLayout = (DrawerLayout)findViewById(R.id.quiz_drawer_layout);
 
-        toolbar = (Toolbar)findViewById(R.id.store_toolbar);
+        toolbar = (Toolbar)findViewById(R.id.quiz_toolbar);
         setSupportActionBar(toolbar);
 
         try {
@@ -46,16 +65,13 @@ public class WebViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        webView = (WebView)findViewById(R.id.store_webview);
+        itemList = new ArrayList<>();
 
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+        fragmentManager = getSupportFragmentManager();
+        QuizFragment quizFragment = new QuizFragment();
+        fragmentManager.beginTransaction().replace(R.id.quiz_fragment, quizFragment).commit();
 
-        StoreClient storeClient = new StoreClient(this);
-
-        webView.loadUrl(STORE_URL);
-
-        NavigationView navigationView=(NavigationView)findViewById(R.id.register_nav_view);
+        NavigationView navigationView=(NavigationView)findViewById(R.id.quiz_nav_view);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -108,7 +124,7 @@ public class WebViewActivity extends AppCompatActivity {
                     return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_quiz) {
-                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
+                    drawerLayout.closeDrawers();
                     return true;
                 }
                 return false;
@@ -116,32 +132,13 @@ public class WebViewActivity extends AppCompatActivity {
         });
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.toolbar_menu_profile:
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                return true;
-            case R.id.toolbar_menu_cart:
-                startActivity(new Intent(getApplicationContext(), CartActivity.class));
-                return true;
-            case R.id.toolbar_menu_log_out:
-                SharedPreferences.Editor profEditor = getSharedPreferences("Profile", MODE_PRIVATE).edit();
-                profEditor.putBoolean("Logged", false);
-                profEditor.apply();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && this.webView.canGoBack()) {
-            this.webView.goBack();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 }

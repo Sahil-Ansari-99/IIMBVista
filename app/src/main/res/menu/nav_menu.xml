@@ -19,15 +19,15 @@
         android:icon="@drawable/ic_nav_events"
         android:title="Events" />
 
-    <item
-        android:id="@+id/nav_login"
-        android:icon="@drawable/ic_nav_login"
-        android:title="Login" />
+    <!--<item-->
+        <!--android:id="@+id/nav_login"-->
+        <!--android:icon="@drawable/ic_nav_login"-->
+        <!--android:title="Login" />-->
 
-    <item
-        android:id="@+id/nav_profile"
-        android:icon="@drawable/ic_nav_login"
-        android:title="Profile" />
+    <!--<item-->
+        <!--android:id="@+id/nav_profile"-->
+        <!--android:icon="@drawable/ic_nav_login"-->
+        <!--android:title="Profile" />-->
 
     <item
         android:id="@+id/nav_accommodation"
@@ -39,14 +39,19 @@
         android:icon="@drawable/ic_nav_merch"
         android:title="Merchandise" />
 
+    <item
+        android:id="@+id/nav_quiz"
+        android:icon="@drawable/ic_nav_quiz"
+        android:title="Quiz" />
+
     <!--<item-->
         <!--android:id="@+id/nav_cart"-->
         <!--android:icon="@drawable/ic_shopping_cart"-->
         <!--android:title="Cart" />-->
 
-    <item
-        android:id="@+id/nav_logout"
-        android:icon="@drawable/ic_nav_logout"
-        android:title="Logout" />
+    <!--<item-->
+        <!--android:id="@+id/nav_logout"-->
+        <!--android:icon="@drawable/ic_nav_logout"-->
+        <!--android:title="Logout" />-->
 
 </menu>

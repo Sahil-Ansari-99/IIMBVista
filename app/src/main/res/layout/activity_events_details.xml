@@ -11,7 +11,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/toolbar"
+        android:id="@+id/event_details_toolbar"
         android:background="@color/colorPrimary"
         app:title="Event Details"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,10 +42,10 @@
                 <ImageView
                     android:id="@+id/event_image"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="250dp"
                     android:layout_marginBottom="15dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     app:srcCompat="@android:color/darker_gray"/>
 
                 <View
