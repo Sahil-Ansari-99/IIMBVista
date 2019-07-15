@@ -10,9 +10,10 @@
         android:icon="@drawable/ic_register"
         android:title="Register" />
 
-    <item android:id="@+id/nav_sponsors"
+    <item
+        android:id="@+id/nav_sponsors"
         android:icon="@drawable/ic_nav_sponsors"
-        android:title="Sponsors" />
+        android:title="Past Sponsors" />
 
     <item
         android:id="@+id/nav_events"
