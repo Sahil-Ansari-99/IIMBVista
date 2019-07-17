@@ -41,6 +41,7 @@
         <activity android:name=".AccommodationActivity" />
         <activity android:name=".Quiz.QuizActivity" />
         <activity android:name=".Quiz.QuizCongo"/>
+        <activity android:name=".Events.EventsWebview" />
         <activity android:name=".MerchActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".ConfirmEmail">

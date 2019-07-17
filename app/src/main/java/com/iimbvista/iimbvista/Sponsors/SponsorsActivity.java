@@ -29,6 +29,7 @@ import com.iimbvista.iimbvista.Adapter.SponsorsAdapter;
 import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.Events.EventsMainNew;
+import com.iimbvista.iimbvista.Events.EventsWebview;
 import com.iimbvista.iimbvista.LoginActivity;
 import com.iimbvista.iimbvista.MainActivity;
 import com.iimbvista.iimbvista.MerchActivity;
@@ -105,7 +106,7 @@ public class SponsorsActivity extends AppCompatActivity {
 //                    }
 //                }
                 else if(menuItem.getItemId() == R.id.nav_events){
-                    startActivity(new Intent(getApplicationContext(), EventsMainNew.class));
+                    startActivity(new Intent(getApplicationContext(), EventsWebview.class));
                     return true;
                 }
 //                else if(menuItem.getItemId() == R.id.nav_profile){
@@ -131,10 +132,10 @@ public class SponsorsActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MerchActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_quiz) {
-                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_quiz) {
+//                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
+//                    return true;
+//                }
                 return false;
             }
         });

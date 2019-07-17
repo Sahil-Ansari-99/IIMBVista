@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.Events.EventsMainNew;
+import com.iimbvista.iimbvista.Events.EventsWebview;
 import com.iimbvista.iimbvista.Quiz.QuizActivity;
 import com.iimbvista.iimbvista.Register.RegisterActivity;
 import com.iimbvista.iimbvista.Register.RegisterNew;
@@ -80,7 +81,7 @@ public class MerchActivity extends AppCompatActivity {
                     return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_events){
-                    startActivity(new Intent(getApplicationContext(), EventsMainNew.class));
+                    startActivity(new Intent(getApplicationContext(), EventsWebview.class));
                     return true;
                 }
 //                else if(menuItem.getItemId() == R.id.nav_profile){
@@ -106,10 +107,10 @@ public class MerchActivity extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_quiz) {
-                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_quiz) {
+//                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
+//                    return true;
+//                }
                 return false;
             }
         });

@@ -13,7 +13,7 @@
     <item
         android:id="@+id/nav_sponsors"
         android:icon="@drawable/ic_nav_sponsors"
-        android:title="Past Sponsors" />
+        android:title="Sponsors" />
 
     <item
         android:id="@+id/nav_events"
@@ -40,10 +40,10 @@
         android:icon="@drawable/ic_nav_merch"
         android:title="Merchandise" />
 
-    <item
-        android:id="@+id/nav_quiz"
-        android:icon="@drawable/ic_nav_quiz"
-        android:title="Quiz" />
+    <!--<item-->
+        <!--android:id="@+id/nav_quiz"-->
+        <!--android:icon="@drawable/ic_nav_quiz"-->
+        <!--android:title="Quiz" />-->
 
     <!--<item-->
         <!--android:id="@+id/nav_cart"-->

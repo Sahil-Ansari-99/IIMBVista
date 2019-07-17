@@ -123,10 +123,10 @@ public class QuizActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MerchActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_quiz) {
-                    drawerLayout.closeDrawers();
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_quiz) {
+//                    drawerLayout.closeDrawers();
+//                    return true;
+//                }
                 return false;
             }
         });

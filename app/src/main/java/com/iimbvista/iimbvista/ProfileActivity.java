@@ -146,10 +146,10 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MerchActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_quiz) {
-                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_quiz) {
+//                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
+//                    return true;
+//                }
                 return false;
             }
         });

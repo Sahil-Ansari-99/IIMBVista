@@ -33,6 +33,7 @@ import com.google.gson.reflect.TypeToken;
 import com.iimbvista.iimbvista.Events.CartActivity;
 import com.iimbvista.iimbvista.Events.EventsMain;
 import com.iimbvista.iimbvista.Events.EventsMainNew;
+import com.iimbvista.iimbvista.Events.EventsWebview;
 import com.iimbvista.iimbvista.Model.Home;
 import com.iimbvista.iimbvista.Model.HomeRoot;
 import com.iimbvista.iimbvista.Quiz.QuizActivity;
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
                 else if(menuItem.getItemId() == R.id.nav_events){
-                    startActivity(new Intent(getApplicationContext(), EventsMainNew.class));
+                    startActivity(new Intent(getApplicationContext(), EventsWebview.class));
                     return true;
                 }
 //                else if(menuItem.getItemId() == R.id.nav_profile){
@@ -184,10 +185,10 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MerchActivity.class));
                     return true;
                 }
-                else if(menuItem.getItemId() == R.id.nav_quiz) {
-                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
-                    return true;
-                }
+//                else if(menuItem.getItemId() == R.id.nav_quiz) {
+//                    startActivity(new Intent(getApplicationContext(), QuizActivity.class));
+//                    return true;
+//                }
                 return false;
             }
         });
